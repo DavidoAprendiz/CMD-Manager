@@ -1,6 +1,0 @@
-[submodule "Learning-Rust"]
-	path = Learning-Rust
-	url = .\\Learning-Rust\\
-[submodule "rustlings"]
-	path = rustlings
-	url = .\\rustlings\\

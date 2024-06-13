@@ -52,7 +52,7 @@ fn show_task() {
     println!("#                  All Tasks!                 #");
     println!("###############################################");
     get_tasks_from_folder();
-    sleep_for(1000)
+    sleep_for(1500)
 }
 
 /// Create a new task with the user input. Generate field 'task_name' and 'task'.
@@ -84,30 +84,29 @@ fn save_task(user_task_name: String, user_task: String) {
         &user_task_name.trim(),
         &user_task.trim()
     );
-
-    // check if folder exists, or create folder Todo
-    //check if file exists
-
+    check_folder();
     let current_time = get_current_time();
-    //
-
-    let path = format!("src\\Tasks\\{}.txt", &current_time).to_string();
-    //
-    //
+    let path = format!(
+        "{}\\Tasks\\{}.txt",
+        std::env::current_dir()
+            .expect("Failed to access current directory.")
+            .display(),
+        &current_time
+    );
     let mut file = fs::File::create(path).expect("Failed to create text file!");
     file.write_fmt(format_args!("{}\n{}", &user_task_name, &user_task))
         .expect("Failed to save task in file!");
-
     println!("###############################################");
     println!("#                 TASK saved!                 #");
     println!("###############################################\n\n");
-    sleep_for(1500);
-    clear_screen()
+    clear_screen();
+    show_task()
 }
 
 /// Boolean to call 'mainloop break' to exit the program.
 fn exit_program(input: &str) -> bool {
-    if input.trim().to_lowercase().starts_with('q') {
+    if input.trim().to_lowercase().starts_with('q') || input.trim().to_lowercase().starts_with('e')
+    {
         println!("###############################################");
         println!("#                  Thank you!                 #");
         println!("###############################################");
@@ -148,7 +147,14 @@ fn get_current_time() -> String {
 
 /// Loop to get all tasks in specific a folder 'src\Tasks'
 fn get_tasks_from_folder() {
-    let path = "src\\Tasks";
+    check_folder();
+
+    let path = format!(
+        "{}\\Tasks",
+        std::env::current_dir()
+            .expect("Failed to access current directory.")
+            .display(),
+    );
     println!();
     match fs::read_dir(path) {
         Ok(tasks) => {
@@ -166,4 +172,15 @@ fn get_tasks_from_folder() {
         Err(e) => println!("Failed to read 'Tasks' folder content.\nError: {e}"),
     }
     println!();
+}
+
+/// Check if folder 'Tasks' exists in root folder.
+fn check_folder() {
+    fs::create_dir_all(format!(
+        "{}\\Tasks\\",
+        std::env::current_dir()
+            .expect("Failed to access current directory.")
+            .display()
+    ))
+    .expect("Failed to create folder 'Tasks'.");
 }

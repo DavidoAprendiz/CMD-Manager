@@ -2,8 +2,7 @@ use chrono::{Local, Timelike};
 use std::io::{self, Write};
 use std::{fs, thread, time};
 
-#[path = "../utils/mod.rs"]
-mod utils;
+use crate::utils;
 
 pub fn main() {
     utils::clear_screen();
@@ -188,7 +187,7 @@ fn check_folder() {
     }
 }
 
-/// Run the menu layout. Choose between 'welcome' and 'running' message.
+/// Run the menu layout.
 fn start_menu() {
     println!("###############################################");
     println!("#                                             #");

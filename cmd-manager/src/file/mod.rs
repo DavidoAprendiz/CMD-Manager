@@ -1,9 +1,9 @@
-mod file; // File Manager
-mod todo; // Todo Manager
-mod utils; // Common functions
-mod web; // Web Manager
+mod compare;
+mod search;
 
-fn main() {
+use crate::utils;
+
+pub fn main() {
     utils::clear_screen();
     start_menu();
     'main_loop: loop {
@@ -11,9 +11,8 @@ fn main() {
         let user_input = utils::get_user_input();
 
         match user_input.trim() {
-            "1" => todo::main(),
-            "2" => file::main(),
-            "3" => web::main(),
+            "1" => search::main(),
+            "2" => compare::main(),
             _ => {
                 if utils::exit_program(&user_input) {
                     break 'main_loop;
@@ -23,22 +22,22 @@ fn main() {
         }
         start_menu();
     }
+    utils::clear_screen();
 }
 
 /// Run the menu layout.
 fn start_menu() {
     println!("###############################################");
     println!("#                                             #");
-    println!("#           Welcome to cmd-manager!           #");
+    println!("#           Welcome to File-manager!          #");
     println!("#                                             #");
     println!("###############################################");
     println!("###############################################");
     println!("#                                             #");
     println!("#  Select an operation:                       #");
     println!("#                                             #");
-    println!("#     '1' -> ToDo Manager                     #");
-    println!("#     '2' -> File Manager                     #");
-    println!("#     '3' -> Web Manager                      #");
+    println!("#     '1' -> Search in File                   #");
+    println!("#     '2' -> Compare two files                #");
     println!("#                                             #");
     println!("#     'Q' -> Exit                             #");
     println!("###############################################");

@@ -57,13 +57,6 @@ fn remove_task() {
     }
 }
 
-fn _is_task_completed() {
-    utils::clear_screen();
-    println!("###############################################");
-    println!("#                  FUNC compl!                #");
-    println!("###############################################");
-}
-
 /// Get all tasks in folder 'src\Tasks'
 fn show_task() {
     utils::clear_screen();

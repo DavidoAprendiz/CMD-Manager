@@ -32,3 +32,26 @@ pub fn exit_program(input: &str) -> bool {
     }
     false
 }
+
+/// Get current directory plus folder (as String)
+pub fn get_file_path(user_file: String) -> String {
+    format!(
+        "{}\\{user_file}",
+        std::env::current_dir()
+            .expect("Failed to access current directory.\n")
+            .display()
+    )
+}
+
+/// Check if folder 'Tasks' exists in root folder.
+pub fn create_folder(path: String) {
+    match std::fs::create_dir_all(format!(
+        "{}\\{path}\\",
+        std::env::current_dir()
+            .expect("Failed to access current directory.\n")
+            .display()
+    )) {
+        Ok(_) => {}
+        Err(e) => println!("Failed to create folder 'Tasks'.\n{e}\n"),
+    }
+}

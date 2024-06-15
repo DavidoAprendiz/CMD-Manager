@@ -18,7 +18,7 @@ fn start_menu() {
 
 fn get_pattern() {
     println!("\n- Available files:\n");
-    get_tasks_from_folder();
+    get_files_from_folder();
     println!("\n- Please insert the pattern you want to search:");
     get_file(utils::get_user_input())
 }
@@ -30,9 +30,9 @@ fn get_file(user_pattern: String) {
 }
 
 fn get_results(user_pattern: String, user_file: String) {
-    let path = get_file_path(user_file);
+    let path = utils::get_file_path(user_file);
     println!("\n###############################################");
-    println!("- The results for file -> {}\n", &path);
+    println!("- The results for:  {}  ->  {}\n", &user_pattern, &path);
 
     let mut count_total: u64 = 0;
     let mut count_line: u64 = 0;
@@ -54,8 +54,8 @@ fn get_results(user_pattern: String, user_file: String) {
     utils::clear_screen()
 }
 
-fn get_tasks_from_folder() {
-    let path = get_file_path("".to_string());
+fn get_files_from_folder() {
+    let path = utils::get_file_path("".to_string());
     match fs::read_dir(path) {
         Ok(dirs) => {
             for files in dirs {
@@ -76,14 +76,4 @@ fn get_tasks_from_folder() {
         Err(e) => println!("Failed to read the current folder.\nError: {e}\n"),
     }
     println!();
-}
-
-fn get_file_path(user_file: String) -> String {
-    let path = format!(
-        "{}\\{user_file}",
-        std::env::current_dir()
-            .expect("Failed to access current directory.\n")
-            .display(),
-    );
-    path
 }

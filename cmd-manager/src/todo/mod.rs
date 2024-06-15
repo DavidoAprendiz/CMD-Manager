@@ -6,6 +6,7 @@ use crate::utils;
 
 pub fn main() {
     utils::clear_screen();
+    utils::create_folder("Tasks".to_string());
     start_menu();
 
     'main_loop: loop {
@@ -73,16 +74,16 @@ fn add_task() {
     println!("###############################################");
     println!("#              Create a new task!             #");
     println!("###############################################");
-    println!("- Please insert the name of the task:");
+    println!("- Please insert the task name:");
     let mut task_name: String = String::new();
     io::stdin()
         .read_line(&mut task_name)
         .expect("Failed to get 'task_name'.\n");
-    println!("- Please insert the task:");
+    println!("- Please insert the task description:");
     let mut task: String = String::new();
     io::stdin()
         .read_line(&mut task)
-        .expect("Failed to get 'task'.\n");
+        .expect("Failed to get 'task description'.\n");
     println!("###############################################");
     save_task(task_name, task);
 }
@@ -96,7 +97,6 @@ fn save_task(user_task_name: String, user_task: String) {
         &user_task_name.trim(),
         &user_task.trim()
     );
-    check_folder();
     let current_time = get_current_time();
     let path = format!(
         "{}\\Tasks\\{}.txt",
@@ -140,14 +140,7 @@ fn get_current_time() -> String {
 
 /// Loop to get all tasks in specific a folder 'src\Tasks'
 fn get_tasks_from_folder() {
-    check_folder();
-
-    let path = format!(
-        "{}\\Tasks",
-        std::env::current_dir()
-            .expect("Failed to access current directory.\n")
-            .display(),
-    );
+    let path = utils::get_file_path("Tasks".to_string());
     println!();
     match fs::read_dir(path) {
         Ok(tasks) => {
@@ -165,19 +158,6 @@ fn get_tasks_from_folder() {
         Err(e) => println!("Failed to read 'Tasks' folder content.\nError: {e}\n"),
     }
     println!();
-}
-
-/// Check if folder 'Tasks' exists in root folder.
-fn check_folder() {
-    match fs::create_dir_all(format!(
-        "{}\\Tasks\\",
-        std::env::current_dir()
-            .expect("Failed to access current directory.\n")
-            .display()
-    )) {
-        Ok(_) => {}
-        Err(e) => println!("Failed to create folder 'Tasks'.\n{e}\n"),
-    }
 }
 
 /// Run the menu layout.

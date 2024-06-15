@@ -116,12 +116,12 @@ fn save_task(user_task_name: String, user_task: String) {
     show_task()
 }
 
-/// Iniciate a timer with milliseconds as input.
+/// Initiate a timer with milliseconds as input.
 fn sleep_for(milliseconds: u64) {
     thread::sleep(time::Duration::from_millis(milliseconds));
 }
 
-/// Calculate the Hours and Minutes from 'seconds_from_midnight'. Return a String and is used in 'save_task(), as exemple.'.
+/// Calculate the Hours and Minutes from 'seconds_from_midnight'. Return a String and is used in 'save_task(), as example.'.
 fn get_current_time() -> String {
     let hours = (Local::now().num_seconds_from_midnight() as f32) / 3600.00;
     let minutes = (&hours % 1.0) * 60.0;

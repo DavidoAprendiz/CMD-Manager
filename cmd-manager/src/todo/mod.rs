@@ -17,6 +17,7 @@ pub fn main() {
             "1" => add_task(),
             "2" => remove_task(),
             "3" => show_task(),
+            "4" => view_task(),
             _ => {
                 if utils::exit_program(&user_input) {
                     break 'main_loop;
@@ -37,13 +38,14 @@ fn remove_task() {
     get_tasks_from_folder();
     println!("###############################################");
     println!("#  Insert the name of the task to be removed  #");
-    println!("#         example:      18_50                 #");
+    println!("#     example:   16-06-2024-04_09_54.txt      #");
+    println!("# (other file extensions are also functional) #");
     println!("###############################################");
 
     let user_input = utils::get_user_input();
 
     let path = format_args!(
-        "{}\\Tasks\\{}.txt",
+        "{}\\Tasks\\{}",
         std::env::current_dir()
             .expect("Failed to access current directory.\n")
             .display(),
@@ -105,7 +107,10 @@ fn save_task(user_task_name: String, user_task: String) {
         get_current_time()
     );
     let mut file = fs::File::create(path).expect("Failed to create text file!\n");
-    match file.write_fmt(format_args!("{}\n{}", &user_task_name, &user_task)) {
+    match file.write_fmt(format_args!(
+        "Task Name: {}\nDescription:\n{}",
+        &user_task_name, &user_task
+    )) {
         Ok(_) => (),
         Err(e) => println!("Failed to save task in file!\n{e}\n"),
     }
@@ -147,6 +152,31 @@ fn get_tasks_from_folder() {
     println!();
 }
 
+/// Function to view selected task via 'cat'
+fn view_task() {
+    utils::clear_screen();
+    println!("###############################################");
+    println!("#              View your tasks!               #");
+    println!("###############################################");
+    get_tasks_from_folder();
+    println!("- Please insert the task name:");
+    let user_input = utils::get_user_input();
+    let user_input = format!("Tasks\\{}", user_input);
+    let path = utils::get_file_path(user_input);
+    utils::clear_screen();
+    println!("Task Path -> {}\n\n", &path);
+    match fs::read_to_string(path) {
+        Ok(file) => {
+            println!("{}", file);
+        }
+        Err(e) => {
+            println!("Failed to view task: {}", e);
+        }
+    }
+    utils::get_user_input();
+    utils::clear_screen();
+}
+
 /// Run the menu layout.
 fn start_menu() {
     println!("###############################################");
@@ -159,7 +189,8 @@ fn start_menu() {
     println!("#                                             #");
     println!("#     '1' -> New Task                         #");
     println!("#     '2' -> Remove Task                      #");
-    println!("#     '3' -> Show Tasks                       #");
+    println!("#     '3' -> Show All Tasks                   #");
+    println!("#     '4' -> View Task                        #");
     println!("#                                             #");
     println!("#     'Q' -> Exit                             #");
     println!("###############################################");

@@ -55,3 +55,27 @@ pub fn create_folder(path: String) {
         Err(e) => println!("Failed to create folder 'Tasks'.\n{e}\n"),
     }
 }
+
+pub fn get_files_from_folder() {
+    let path = get_file_path("".to_string());
+    match std::fs::read_dir(path) {
+        Ok(dirs) => {
+            for files in dirs {
+                match files {
+                    Ok(file) => {
+                        if file.path().is_file() {
+                            println!("{:#?}", file.file_name());
+                        }
+                    }
+                    Err(e) => {
+                        println!(
+                            "Failed to read the name of the files in current folder.\nError: {e}\n"
+                        )
+                    }
+                }
+            }
+        }
+        Err(e) => println!("Failed to read the current folder.\nError: {e}\n"),
+    }
+    println!();
+}

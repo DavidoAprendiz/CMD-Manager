@@ -18,7 +18,7 @@ fn start_menu() {
 
 fn get_pattern() {
     println!("\n- Available files:\n");
-    get_files_from_folder();
+    utils::get_files_from_folder();
     println!("\n- Please insert the pattern you want to search:");
     get_file(utils::get_user_input())
 }
@@ -52,28 +52,4 @@ fn get_results(user_pattern: String, user_file: String) {
     }
     utils::get_user_input();
     utils::clear_screen()
-}
-
-fn get_files_from_folder() {
-    let path = utils::get_file_path("".to_string());
-    match fs::read_dir(path) {
-        Ok(dirs) => {
-            for files in dirs {
-                match files {
-                    Ok(file) => {
-                        if file.path().is_file() {
-                            println!("{:#?}", file.file_name());
-                        }
-                    }
-                    Err(e) => {
-                        println!(
-                            "Failed to read the name of the files in current folder.\nError: {e}\n"
-                        )
-                    }
-                }
-            }
-        }
-        Err(e) => println!("Failed to read the current folder.\nError: {e}\n"),
-    }
-    println!();
 }

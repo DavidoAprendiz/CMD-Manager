@@ -1,4 +1,4 @@
-use chrono::{Local, Timelike};
+use chrono::Local;
 use std::io::{self, Write};
 use std::{fs, thread, time};
 
@@ -97,13 +97,12 @@ fn save_task(user_task_name: String, user_task: String) {
         &user_task_name.trim(),
         &user_task.trim()
     );
-    let current_time = get_current_time();
     let path = format!(
         "{}\\Tasks\\{}.txt",
         std::env::current_dir()
             .expect("Failed to access current directory.\n")
             .display(),
-        &current_time
+        get_current_time()
     );
     let mut file = fs::File::create(path).expect("Failed to create text file!\n");
     match file.write_fmt(format_args!("{}\n{}", &user_task_name, &user_task)) {
@@ -123,19 +122,7 @@ fn sleep_for(milliseconds: u64) {
 
 /// Calculate the Hours and Minutes from 'seconds_from_midnight'. Return a String and is used in 'save_task(), as example.'.
 fn get_current_time() -> String {
-    let hours = (Local::now().num_seconds_from_midnight() as f32) / 3600.00;
-    let minutes = (&hours % 1.0) * 60.0;
-    let hours = hours.abs() as i32;
-
-    if hours < 10 && minutes < 10.0 {
-        format!("0{:1.0}_0{:0.1}", hours, &minutes.to_string(),)
-    } else if hours < 10 {
-        format!("0{:1.0}_{:0.2}", hours, &minutes.to_string(),)
-    } else if minutes < 10.0 {
-        format!("{:0.0}_0{:0.1}", hours, &minutes.to_string(),)
-    } else {
-        format!("{:0.0}_{:0.2}", hours, &minutes.to_string(),)
-    }
+    Local::now().format("%d-%m-%Y-%H_%M_%S").to_string()
 }
 
 /// Loop to get all tasks in specific a folder 'src\Tasks'

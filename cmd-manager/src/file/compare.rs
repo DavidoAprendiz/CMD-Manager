@@ -34,34 +34,9 @@ fn get_results(file_1: String, file_2: String) {
         &file1_path, &file2_path
     );
 
-    let mut file1_vector: Vec<String> = Vec::new();
-    let mut file2_vector: Vec<String> = Vec::new();
-
+    let file1_vector = get_vector(file1_path);
+    let file2_vector = get_vector(file2_path);
     let mut count_total: u64 = 0;
-
-    let file1_path = std::fs::File::open(file1_path);
-    let reader = BufReader::new(file1_path.unwrap());
-    for line1 in reader.lines() {
-        if let Ok(l1) = line1 {
-            file1_vector.push(l1);
-            count_total += 1;
-        } else {
-            println!("Failed to get line from file.");
-        }
-    }
-
-    println!();
-
-    let file2_path = std::fs::File::open(file2_path);
-    let reader = BufReader::new(file2_path.unwrap());
-    for line2 in reader.lines() {
-        if let Ok(l2) = line2 {
-            file2_vector.push(l2);
-            count_total += 1;
-        } else {
-            println!("Failed to get line from file.");
-        }
-    }
 
     let big = if file1_vector.len() > file2_vector.len() {
         &file1_vector
@@ -71,20 +46,30 @@ fn get_results(file_1: String, file_2: String) {
 
     for i in 0..=big.len() {
         if file1_vector.get(i) != file2_vector.get(i) {
+            count_total += 1;
             println!("diff detected:   {:?}", big.get(i));
         }
     }
-
-    println!("Total diffs detected ->  {}", count_total);
+    println!("- {count_total} occurrences in total.");
     println!("\n###############################################");
-    println!("vector 1:         {:?}", file1_vector);
-    println!("vector 2:         {:?}", file2_vector);
+    // println!("vector 1:         {:?}", file1_vector);
+    // println!("vector 2:         {:?}", file2_vector);
 
-    // println!("- {count_total} occurrences in total.");
-    // println!("###############################################\n");
-
-    //
     // Just to hold the result until key is pressed...
     utils::get_user_input();
     utils::clear_screen()
+}
+
+fn get_vector(path: String) -> Vec<String> {
+    let mut file_vector: Vec<String> = Vec::new();
+    let file = std::fs::File::open(path);
+    let reader = BufReader::new(file.unwrap()); // to be removed
+    for line1 in reader.lines() {
+        if let Ok(l1) = line1 {
+            file_vector.push(l1);
+        } else {
+            println!("Failed to get line from file.");
+        }
+    }
+    file_vector
 }

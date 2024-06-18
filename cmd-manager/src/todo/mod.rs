@@ -1,6 +1,6 @@
 use chrono::Local;
 use std::io::{self, Write};
-use std::{fs, thread, time};
+use std::{env, fs, thread, time};
 
 use crate::utils;
 
@@ -8,7 +8,6 @@ pub fn main() {
     utils::clear_screen();
     utils::create_folder("Tasks".to_string());
     start_menu();
-
     'main_loop: loop {
         println!("Enter your option: ");
         let user_input = utils::get_user_input();
@@ -43,15 +42,29 @@ fn remove_task() {
     println!("###############################################");
 
     let user_input = utils::get_user_input();
+    let operating_system = env::consts::OS;
 
-    let path = format_args!(
-        "{}\\Tasks\\{}",
-        std::env::current_dir()
-            .expect("Failed to access current directory.\n")
-            .display(),
-        user_input
-    )
-    .to_string();
+    let path: String = {
+        if operating_system.contains("windows") {
+            format_args!(
+                "{}\\Tasks\\{}",
+                std::env::current_dir()
+                    .expect("Failed to access current directory.\n")
+                    .display(),
+                user_input
+            )
+            .to_string()
+        } else {
+            format_args!(
+                "{}/Tasks/{}",
+                std::env::current_dir()
+                    .expect("Failed to access current directory.\n")
+                    .display(),
+                user_input
+            )
+            .to_string()
+        }
+    };
 
     let file = fs::remove_file(path.trim());
     match file {
@@ -99,13 +112,26 @@ fn save_task(user_task_name: String, user_task: String) {
         &user_task_name.trim(),
         &user_task.trim()
     );
-    let path = format!(
-        "{}\\Tasks\\{}.txt",
-        std::env::current_dir()
-            .expect("Failed to access current directory.\n")
-            .display(),
-        get_current_time()
-    );
+    let operating_system = env::consts::OS;
+    let path: String = {
+        if operating_system.contains("windows") {
+            format!(
+                "{}\\Tasks\\{}.txt",
+                std::env::current_dir()
+                    .expect("Failed to access current directory.\n")
+                    .display(),
+                get_current_time()
+            )
+        } else {
+            format!(
+                "{}/Tasks/{}.txt",
+                std::env::current_dir()
+                    .expect("Failed to access current directory.\n")
+                    .display(),
+                get_current_time()
+            )
+        }
+    };
     let mut file = fs::File::create(path).expect("Failed to create text file!\n");
     match file.write_fmt(format_args!(
         "Task Name: {}\nDescription:\n{}",
@@ -161,7 +187,16 @@ fn view_task() {
     get_tasks_from_folder();
     println!("- Please insert the task name:");
     let user_input = utils::get_user_input();
-    let user_input = format!("Tasks\\{}", user_input);
+
+    let operating_system = env::consts::OS;
+    let user_input: String = {
+        if operating_system.contains("windows") {
+            format!("Tasks\\{}", user_input)
+        } else {
+            format!("Tasks/{}", user_input)
+        }
+    };
+
     let path = utils::get_file_path(user_input);
     utils::clear_screen();
     println!("Task Path -> {}\n\n", &path);

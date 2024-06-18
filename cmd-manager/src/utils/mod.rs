@@ -21,7 +21,10 @@ pub fn clear_screen() {
             Err(e) => println!("Failed to clear the screen.\n{e}\n"),
         }
     } else {
-        println!("{}[2J", 27 as char);
+        match process::Command::new("clear").status() {
+            Ok(_) => (),
+            Err(e) => println!("Failed to clear the screen.\n{e}\n"),
+        }
     }
 }
 
@@ -80,8 +83,8 @@ pub fn create_folder(path: String) {
     }
 }
 
-pub fn get_files_from_folder() {
-    let path = get_file_path("".to_string());
+pub fn get_files_from_folder(user_path: String) {
+    let path = get_file_path(user_path);
     match std::fs::read_dir(path) {
         Ok(dirs) => {
             for files in dirs {

@@ -34,7 +34,8 @@ fn remove_task() {
     println!("###############################################");
     println!("#                Remove a task!               #");
     println!("###############################################");
-    get_tasks_from_folder();
+    //get_tasks_from_folder();
+    utils::get_files_from_folder("Tasks".to_string());
     println!("###############################################");
     println!("- Insert the name of the task to be removed  ");
     println!("     example:   16-06-2024-04_09_54.txt      \n");
@@ -72,7 +73,8 @@ fn show_task() {
     println!("###############################################");
     println!("#                  All Tasks!                 #");
     println!("###############################################");
-    get_tasks_from_folder();
+    //get_tasks_from_folder();
+    utils::get_files_from_folder("Tasks".to_string());
     sleep_for(1500)
 }
 
@@ -147,35 +149,14 @@ fn get_current_time() -> String {
     Local::now().format("%d-%m-%Y-%H_%M_%S").to_string()
 }
 
-/// Loop to get all tasks in specific a folder 'src\Tasks'
-fn get_tasks_from_folder() {
-    let path = utils::get_file_path("Tasks".to_string());
-    println!();
-    match fs::read_dir(path) {
-        Ok(tasks) => {
-            for file in tasks {
-                match file {
-                    Ok(task) => {
-                        println!("{:?}", task.file_name());
-                    }
-                    Err(e) => {
-                        println!("Failed to read 'File Name' in folder 'Tasks'.\nError: {e}\n")
-                    }
-                }
-            }
-        }
-        Err(e) => println!("Failed to read 'Tasks' folder content.\nError: {e}\n"),
-    }
-    println!();
-}
-
 /// Function to view selected task via 'cat'
 fn view_task() {
     utils::clear_screen();
     println!("###############################################");
     println!("#              View your tasks!               #");
     println!("###############################################");
-    get_tasks_from_folder();
+    //get_tasks_from_folder();
+    utils::get_files_from_folder("Tasks".to_string());
     println!("- Please insert the task name:");
     let user_input = utils::get_user_input();
 

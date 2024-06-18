@@ -18,7 +18,7 @@ fn start_menu() {
 
 fn get_pattern() {
     println!("\n- Available files:\n");
-    utils::get_files_from_folder();
+    utils::get_files_from_folder("".to_string());
     println!("\n- Please insert the pattern you want to search:");
     get_file(utils::get_user_input())
 }

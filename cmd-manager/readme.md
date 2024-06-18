@@ -13,4 +13,7 @@
     - [ ] compare file sizes via "File Manager" (in-progress)
     - [ ] download files via "Web Manager" (in-progress)
 
+
+(for Linux and Windows)
+
 ---

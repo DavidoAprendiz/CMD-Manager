@@ -12,11 +12,11 @@ pub fn get_user_input() -> String {
     }
 }
 
-/// Clean the screen via cls (windows), clear.
+/// Clean the screen via clear.
 pub fn clear_screen() {
     let operating_system = env::consts::OS;
     if operating_system.contains("windows") {
-        match process::Command::new("cmd").args(["/c", "cls"]).status() {
+        match process::Command::new("cmd").args(["/c", "clear"]).status() {
             Ok(_) => (),
             Err(e) => println!("Failed to clear the screen.\n{e}\n"),
         }
@@ -40,48 +40,43 @@ pub fn exit_program(input: &str) -> bool {
 
 /// Get current directory plus folder (as String)
 pub fn get_file_path(user_file: String) -> String {
-    println!("{}", &user_file);
     let operating_system = env::consts::OS;
-    if operating_system.contains("windows") {
-        format!(
-            "{}\\{user_file}",
-            std::env::current_dir()
-                .expect("Failed to access current directory.\n")
-                .display()
-        )
+    let operating_system = if operating_system.contains("windows") {
+        "\\"
     } else {
-        format!(
-            "{}/{user_file}",
-            std::env::current_dir()
-                .expect("Failed to access current directory.\n")
-                .display()
-        )
-    }
+        "/"
+    };
+
+    format!(
+        "{}{}{}",
+        std::env::current_dir()
+            .expect("Failed to access current directory.\n")
+            .display(),
+        operating_system,
+        user_file
+    )
 }
 
 /// Check if folder 'Tasks' exists in root folder.
 pub fn create_folder(path: String) {
     let operating_system = env::consts::OS;
-    if operating_system.contains("windows") {
-        match std::fs::create_dir_all(format!(
-            "{}\\{path}\\",
-            std::env::current_dir()
-                .expect("Failed to access current directory.\n")
-                .display()
-        )) {
-            Ok(_) => {}
-            Err(e) => println!("Failed to create folder 'Tasks'.\n{e}\n"),
-        }
+    let operating_system = if operating_system.contains("windows") {
+        "\\"
     } else {
-        match std::fs::create_dir_all(format!(
-            "{}/{path}/",
-            std::env::current_dir()
-                .expect("Failed to access current directory.\n")
-                .display()
-        )) {
-            Ok(_) => {}
-            Err(e) => println!("Failed to create folder 'Tasks'.\n{e}\n"),
-        }
+        "/"
+    };
+
+    match std::fs::create_dir_all(format!(
+        "{}{}{}{}",
+        std::env::current_dir()
+            .expect("Failed to access current directory.\n")
+            .display(),
+        operating_system,
+        path,
+        operating_system
+    )) {
+        Ok(_) => {}
+        Err(e) => println!("Failed to create folder 'Tasks'.\n{e}\n"),
     }
 }
 

@@ -36,34 +36,27 @@ fn remove_task() {
     println!("###############################################");
     get_tasks_from_folder();
     println!("###############################################");
-    println!("#  Insert the name of the task to be removed  #");
-    println!("#     example:   16-06-2024-04_09_54.txt      #");
-    println!("# (other file extensions are also functional) #");
-    println!("###############################################");
-
+    println!("- Insert the name of the task to be removed  ");
+    println!("     example:   16-06-2024-04_09_54.txt      \n");
     let user_input = utils::get_user_input();
+
     let operating_system = env::consts::OS;
+    let operating_system = if operating_system.contains("windows") {
+        "\\Tasks\\"
+    } else {
+        "/Tasks/"
+    };
 
     let path: String = {
-        if operating_system.contains("windows") {
-            format_args!(
-                "{}\\Tasks\\{}",
-                std::env::current_dir()
-                    .expect("Failed to access current directory.\n")
-                    .display(),
-                user_input
-            )
-            .to_string()
-        } else {
-            format_args!(
-                "{}/Tasks/{}",
-                std::env::current_dir()
-                    .expect("Failed to access current directory.\n")
-                    .display(),
-                user_input
-            )
-            .to_string()
-        }
+        format_args!(
+            "{}{}{}",
+            std::env::current_dir()
+                .expect("Failed to access current directory.\n")
+                .display(),
+            operating_system,
+            user_input
+        )
+        .to_string()
     };
 
     let file = fs::remove_file(path.trim());
@@ -112,25 +105,23 @@ fn save_task(user_task_name: String, user_task: String) {
         &user_task_name.trim(),
         &user_task.trim()
     );
+
     let operating_system = env::consts::OS;
+    let operating_system = if operating_system.contains("windows") {
+        "\\Tasks\\"
+    } else {
+        "/Tasks/"
+    };
+
     let path: String = {
-        if operating_system.contains("windows") {
-            format!(
-                "{}\\Tasks\\{}.txt",
-                std::env::current_dir()
-                    .expect("Failed to access current directory.\n")
-                    .display(),
-                get_current_time()
-            )
-        } else {
-            format!(
-                "{}/Tasks/{}.txt",
-                std::env::current_dir()
-                    .expect("Failed to access current directory.\n")
-                    .display(),
-                get_current_time()
-            )
-        }
+        format!(
+            "{}{}{}.txt",
+            std::env::current_dir()
+                .expect("Failed to access current directory.\n")
+                .display(),
+            operating_system,
+            get_current_time()
+        )
     };
     let mut file = fs::File::create(path).expect("Failed to create text file!\n");
     match file.write_fmt(format_args!(

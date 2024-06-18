@@ -31,8 +31,9 @@ fn get_file(user_pattern: String) {
 
 fn get_results(user_pattern: String, user_file: String) {
     let path = utils::get_file_path(user_file);
+
     println!("\n###############################################");
-    println!("- The results for:  {}  ->  {}\n", &user_pattern, &path);
+    println!("- The results for  '{}'  in  '{}'\n", &user_pattern, &path);
 
     let mut count_total: u64 = 0;
     let mut count_line: u64 = 0;

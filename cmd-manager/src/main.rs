@@ -29,7 +29,7 @@ fn main() {
 fn start_menu() {
     println!("###############################################");
     println!("#                                             #");
-    println!("#           Welcome to cmd-manager!           #");
+    println!("#           Welcome to CMD-Manager!           #");
     println!("#                                             #");
     println!("###############################################");
     println!("###############################################");

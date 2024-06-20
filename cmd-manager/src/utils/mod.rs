@@ -16,7 +16,7 @@ pub fn get_user_input() -> String {
 pub fn clear_screen() {
     let operating_system = env::consts::OS;
     if operating_system.contains("windows") {
-        match process::Command::new("cmd").args(["/c", "clear"]).status() {
+        match process::Command::new("cmd").args(["/c", "cls"]).status() {
             Ok(_) => (),
             Err(e) => println!("Failed to clear the screen.\n{e}\n"),
         }

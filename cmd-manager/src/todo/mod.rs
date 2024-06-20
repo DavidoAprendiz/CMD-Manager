@@ -134,7 +134,7 @@ fn save_task(user_task_name: String, user_task: String) {
         Err(e) => println!("Failed to save task in file!\n{e}\n"),
     }
     println!("###############################################");
-    println!("#                 TASK saved!                 #");
+    println!("#                 Task saved!                 #");
     println!("###############################################\n\n");
     show_task()
 }
@@ -188,7 +188,7 @@ fn view_task() {
 fn start_menu() {
     println!("###############################################");
     println!("#                                             #");
-    println!("#       cmd-manager  -  Your TODO list!       #");
+    println!("#                To-do Manager                #");
     println!("#                                             #");
     println!("###############################################");
     println!("#                                             #");

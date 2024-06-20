@@ -29,7 +29,7 @@ pub fn main() {
 fn start_menu() {
     println!("###############################################");
     println!("#                                             #");
-    println!("#           Welcome to File-manager!          #");
+    println!("#                File Manager                 #");
     println!("#                                             #");
     println!("###############################################");
     println!("###############################################");

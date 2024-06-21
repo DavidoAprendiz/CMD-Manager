@@ -3,7 +3,6 @@ mod download;
 mod web_req;
 
 pub fn main() {
-    utils::clear_screen();
     start_menu();
     'main_loop: loop {
         println!("Enter your option: ");
@@ -25,6 +24,7 @@ pub fn main() {
 }
 
 fn start_menu() {
+    utils::clear_screen();
     println!("###############################################");
     println!("#                                             #");
     println!("#                 Web Request                 #");

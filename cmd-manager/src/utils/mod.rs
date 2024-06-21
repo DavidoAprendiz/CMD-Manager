@@ -1,3 +1,4 @@
+use chrono::Local;
 use std::{env, io, process};
 
 /// Get user input for 'Menus'.
@@ -34,7 +35,7 @@ pub fn exit_program(input: &str) -> bool {
     {
         clear_screen();
         println!("\n###############################################");
-        println!("#                  Good bye!                  #");
+        println!("#                  Exiting...                 #");
         println!("###############################################\n");
         return true;
     }
@@ -105,4 +106,9 @@ pub fn get_files_from_folder(user_path: String) {
         Err(e) => println!("Failed to read the current folder.\nError: {e}\n"),
     }
     println!();
+}
+
+/// Calculate the Hours and Minutes from 'seconds_from_midnight'. Return a String and is used in 'save_task(), as example.'.
+pub fn get_current_time() -> String {
+    Local::now().format("%d-%m-%Y-%H_%M_%S").to_string()
 }

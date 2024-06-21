@@ -2,7 +2,6 @@ use crate::utils;
 use reqwest::blocking::get;
 
 pub fn main() {
-    utils::clear_screen();
     menu();
     println!("Enter your option: ");
     let user_input = utils::get_user_input();
@@ -12,10 +11,10 @@ pub fn main() {
         "2" => get_price_data("cardano".to_string()),
         _ => (),
     }
-    utils::clear_screen();
 }
 
 fn menu() {
+    utils::clear_screen();
     println!("###############################################");
     println!("#                 Price data!                 #");
     println!("###############################################");

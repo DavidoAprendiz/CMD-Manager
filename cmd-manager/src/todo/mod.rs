@@ -1,11 +1,9 @@
-use chrono::Local;
 use std::io::{self, Write};
 use std::{env, fs, thread, time};
 
 use crate::utils;
 
 pub fn main() {
-    utils::clear_screen();
     utils::create_folder("Tasks".to_string());
     start_menu();
     'main_loop: loop {
@@ -25,7 +23,6 @@ pub fn main() {
         }
         start_menu();
     }
-    utils::clear_screen()
 }
 
 /// Delete the task specified by the user.
@@ -34,7 +31,6 @@ fn remove_task() {
     println!("###############################################");
     println!("#                Remove a task!               #");
     println!("###############################################");
-    //get_tasks_from_folder();
     utils::get_files_from_folder("Tasks".to_string());
     println!("###############################################");
     println!("- Insert the name of the task to be removed  ");
@@ -73,7 +69,6 @@ fn show_task() {
     println!("###############################################");
     println!("#                  All Tasks!                 #");
     println!("###############################################");
-    //get_tasks_from_folder();
     utils::get_files_from_folder("Tasks".to_string());
     sleep_for(1500)
 }
@@ -122,7 +117,7 @@ fn save_task(user_task_name: String, user_task: String) {
                 .expect("Failed to access current directory.\n")
                 .display(),
             operating_system,
-            get_current_time()
+            utils::get_current_time()
         )
     };
     let mut file = fs::File::create(path).expect("Failed to create text file!\n");
@@ -144,18 +139,12 @@ fn sleep_for(milliseconds: u64) {
     thread::sleep(time::Duration::from_millis(milliseconds));
 }
 
-/// Calculate the Hours and Minutes from 'seconds_from_midnight'. Return a String and is used in 'save_task(), as example.'.
-fn get_current_time() -> String {
-    Local::now().format("%d-%m-%Y-%H_%M_%S").to_string()
-}
-
 /// Function to view selected task via 'cat'
 fn view_task() {
     utils::clear_screen();
     println!("###############################################");
     println!("#              View your tasks!               #");
     println!("###############################################");
-    //get_tasks_from_folder();
     utils::get_files_from_folder("Tasks".to_string());
     println!("- Please insert the task name:");
     let user_input = utils::get_user_input();
@@ -186,6 +175,7 @@ fn view_task() {
 
 /// Run the menu layout.
 fn start_menu() {
+    utils::clear_screen();
     println!("###############################################");
     println!("#                                             #");
     println!("#                To-do Manager                #");

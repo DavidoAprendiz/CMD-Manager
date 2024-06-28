@@ -10,7 +10,7 @@
 
 ---
 
-## Description: 
+## Description
 
 - A simple command-line application with the following tools:
   - **To-do Manager**
@@ -19,7 +19,7 @@
     - Search Mode - Search any character/word/phrase in text documents.
     - Compare Mode - Compare any document and see all the differences using Myers algo (similar to git)
   - **Web Manager**
-    - Download Mode - Download simple data from web to your local drive. 
+    - Download Mode - Download simple data from web to your local drive.
     - Get API Mode - Get the current price of Ergo and Cardano.
 
 - Fully functional on Linux and Windows.

@@ -28,5 +28,6 @@ $RECYCLE.BIN/
 *.lnk
 
 ### Project
-Tasks/
-Downloads/
+Project/
+# Tasks/
+# Downloads/

@@ -4,7 +4,6 @@ mod search;
 use crate::utils;
 
 pub fn main() {
-    utils::clear_screen();
     start_menu();
     'main_loop: loop {
         println!("Enter your option: ");
@@ -27,6 +26,7 @@ pub fn main() {
 
 /// Run the menu layout.
 fn start_menu() {
+    utils::clear_screen();
     println!("###############################################");
     println!("#                                             #");
     println!("#                File Manager                 #");

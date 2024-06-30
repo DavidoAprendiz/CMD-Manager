@@ -4,13 +4,13 @@ use std::fs;
 extern crate similar;
 
 pub fn main() {
-    utils::clear_screen();
     start_menu();
     get_files()
 }
 
 /// Run the menu layout.
 fn start_menu() {
+    utils::clear_screen();
     println!("###############################################");
     println!("#                                             #");
     println!("#                Compare Files!               #");

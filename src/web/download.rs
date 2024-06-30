@@ -1,60 +1,48 @@
 use crate::utils;
 use reqwest::blocking::get;
-use std::io::Write;
-use std::{env, fs};
+use std::{env, fs, io::Write};
 
 pub fn main() {
     menu();
-    create_folder();
     println!("Enter the url to download: ");
     let user_input = utils::get_user_input();
-
     let url_response = get_response(user_input);
     write_file(url_response);
-
     println!("Finished!");
     utils::get_user_input();
 }
 
 fn menu() {
     utils::clear_screen();
+    utils::create_folder(downloads_folder());
     println!("###############################################");
     println!("#                Download data!               #");
     println!("###############################################");
 }
 
-fn create_folder() {
-    match std::fs::create_dir_all(format!(
-        "{}/Downloads",
-        std::env::current_dir()
-            .expect("Failed to access current directory.\n")
-            .display(),
-    )) {
-        Ok(_) => "".to_string(),
-        Err(_) => "Failed to create folder 'Tasks'".to_string(),
-    };
+fn downloads_folder() -> String {
+    let operating_system = env::consts::OS;
+    if operating_system.contains("windows") {
+        "\\Project\\Downloads\\".to_string()
+    } else {
+        "/Project/Downloads/".to_string()
+    }
 }
+
 fn get_response(user_input: String) -> String {
-    get(user_input)
-        .expect("Failed to process request.")
-        .text()
-        .expect("Failed to display json.")
+    match get(user_input) {
+        Ok(text) => text.text().expect("Failed to display json."),
+        Err(e) => format!("Failed to process request...\n{e}"),
+    }
 }
 
 fn write_file(url_response: String) {
-    let operating_system = env::consts::OS;
-    let operating_system = if operating_system.contains("windows") {
-        "\\Downloads\\"
-    } else {
-        "/Downloads/"
-    };
-
     let file_name = format!(
         "{}{}{}",
         std::env::current_dir()
             .expect("Failed to access current directory.\n")
             .display(),
-        operating_system,
+        downloads_folder(),
         utils::get_current_time()
     );
     let mut file = fs::File::create(file_name).expect("Failed to create text file!\n");

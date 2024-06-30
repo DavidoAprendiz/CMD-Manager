@@ -2,13 +2,13 @@ use crate::utils;
 use std::fs;
 
 pub fn main() {
-    utils::clear_screen();
     start_menu();
     get_pattern();
 }
 
 /// Run the menu layout.
 fn start_menu() {
+    utils::clear_screen();
     println!("###############################################");
     println!("#                                             #");
     println!("#               Search in File!               #");

@@ -15,8 +15,7 @@ pub fn get_user_input() -> String {
 
 /// Clean the screen via clear.
 pub fn clear_screen() {
-    let operating_system = env::consts::OS;
-    if operating_system.contains("windows") {
+    if env::consts::OS.contains("windows") {
         match process::Command::new("cmd").args(["/c", "cls"]).status() {
             Ok(_) => (),
             Err(e) => println!("Failed to clear the screen.\n{e}\n"),
@@ -42,48 +41,43 @@ pub fn exit_program(input: &str) -> bool {
     false
 }
 
+/// Get Operating System paths
+pub fn get_os() -> String {
+    if env::consts::OS.contains("windows") {
+        "\\".to_string()
+    } else {
+        "/".to_string()
+    }
+}
+
 /// Get current directory plus folder (as String)
 pub fn get_file_path(user_file: String) -> String {
-    let operating_system = env::consts::OS;
-    let operating_system = if operating_system.contains("windows") {
-        "\\"
-    } else {
-        "/"
-    };
-
     format!(
         "{}{}{}",
         std::env::current_dir()
             .expect("Failed to access current directory.\n")
             .display(),
-        operating_system,
+        get_os(),
         user_file
     )
 }
 
-/// Check if folder 'Tasks' exists in root folder.
+/// Check if project folder exists in root folder.
 pub fn create_folder(path: String) {
-    let operating_system = env::consts::OS;
-    let operating_system = if operating_system.contains("windows") {
-        "\\"
-    } else {
-        "/"
-    };
-
     match std::fs::create_dir_all(format!(
-        "{}{}{}{}",
+        "{}{}{}",
         std::env::current_dir()
             .expect("Failed to access current directory.\n")
             .display(),
-        operating_system,
         path,
-        operating_system
+        get_os()
     )) {
         Ok(_) => {}
-        Err(e) => println!("Failed to create folder 'Tasks'.\n{e}\n"),
+        Err(e) => println!("Failed to create folder '{path}'.\n{e}\n"),
     }
 }
 
+// Get all files from a specific folder
 pub fn get_files_from_folder(user_path: String) {
     let path = get_file_path(user_path);
     match std::fs::read_dir(path) {

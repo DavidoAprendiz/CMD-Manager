@@ -2,21 +2,32 @@ use crate::utils;
 
 /// Main menu
 pub fn start_menu_main() {
+    let close = "\x1b[0m";
+
+    let blue = format!("{close}\x1b[34m");
+    let turquoise_underline = format!("{close}\x1b[36;4m");
+    let turquoise_underline_bold = format!("{close}\x1b[36;4m");
+
+    println!("{blue}###############################################");
+    println!("#                                             #");
+    println!("#           {turquoise_underline_bold}Welcome to CMD-Manager!{blue}           #");
+    println!("#                                             #");
     println!("###############################################");
     println!("#                                             #");
-    println!("#           Welcome to CMD-Manager!           #");
+    println!(
+        "#     {turquoise_underline}1{blue} -> {turquoise_underline}ToDo Manager{blue}                       #"
+    );
+    println!(
+        "#     {turquoise_underline}2{blue} -> {turquoise_underline}File Manager{blue}                       #"
+    );
+    println!(
+        "#     {turquoise_underline}3{blue} -> {turquoise_underline}Web Manager{blue}                        #"
+    );
     println!("#                                             #");
-    println!("###############################################");
-    println!("###############################################");
-    println!("#                                             #");
-    println!("#  Select an operation:                       #");
-    println!("#                                             #");
-    println!("#     '1' -> ToDo Manager                     #");
-    println!("#     '2' -> File Manager                     #");
-    println!("#     '3' -> Web Manager                      #");
-    println!("#                                             #");
-    println!("#     'Q' -> Exit                             #");
-    println!("###############################################");
+    println!(
+        "#     {turquoise_underline}Q{blue} -> {turquoise_underline}Exit{blue}                               #"
+    );
+    println!("###############################################{close}");
 }
 
 /// File menu

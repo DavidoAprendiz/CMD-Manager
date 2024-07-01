@@ -1,18 +1,31 @@
-### Rust ###
+##########
+#  Rust  #
+##########
 debug/
 target/
 Cargo.lock
 **/*.rs.bk
 *.pdb
 
-### VisualStudioCode ###
+##################################
+#  Editor directories and files  #
+##################################
 .vscode/*
 .visual/
 *.vsix
 .history
 .ionide
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
-### Windows ###
+#############
+#  Windows  #
+#############
 Thumbs.db
 Thumbs.db:encryptable
 ehthumbs.db
@@ -27,7 +40,18 @@ $RECYCLE.BIN/
 *.msp
 *.lnk
 
-### Project
+##########
+#  Logs  #
+##########
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+#############
+#  Project  #
+#############
 Project/
-# Tasks/
-# Downloads/

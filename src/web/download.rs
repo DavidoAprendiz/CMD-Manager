@@ -1,23 +1,15 @@
-use crate::utils;
+use crate::{utils, views};
 use reqwest::blocking::get;
 use std::{env, fs, io::Write};
 
 pub fn main() {
-    menu();
-    println!("Enter the url to download: ");
+    utils::create_folder(downloads_folder());
+    views::start_menu_download();
     let user_input = utils::get_user_input();
     let url_response = get_response(user_input);
     write_file(url_response);
     println!("Finished!");
     utils::get_user_input();
-}
-
-fn menu() {
-    utils::clear_screen();
-    utils::create_folder(downloads_folder());
-    println!("###############################################");
-    println!("#                Download data!               #");
-    println!("###############################################");
 }
 
 fn downloads_folder() -> String {

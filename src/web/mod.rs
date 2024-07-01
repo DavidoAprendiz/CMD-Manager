@@ -1,9 +1,9 @@
-use crate::utils;
+use crate::{utils, views};
 mod download;
 mod web_req;
 
 pub fn main() {
-    start_menu();
+    views::start_menu_web();
     'main_loop: loop {
         println!("Enter your option: ");
         let user_input = utils::get_user_input();
@@ -18,24 +18,7 @@ pub fn main() {
                 utils::clear_screen()
             }
         }
-        start_menu();
+        views::start_menu_web();
     }
     utils::clear_screen();
-}
-
-fn start_menu() {
-    utils::clear_screen();
-    println!("###############################################");
-    println!("#                                             #");
-    println!("#                 Web Request                 #");
-    println!("#                                             #");
-    println!("###############################################");
-    println!("#                                             #");
-    println!("#  Select an operation:                       #");
-    println!("#                                             #");
-    println!("#     '1' -> Download files                   #");
-    println!("#     '2' -> Get price data                   #");
-    println!("#                                             #");
-    println!("#     'Q' -> Exit                             #");
-    println!("###############################################");
 }

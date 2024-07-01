@@ -1,21 +1,11 @@
-use crate::utils;
+use crate::{utils, views};
 use similar::TextDiff;
 use std::fs;
 extern crate similar;
 
 pub fn main() {
-    start_menu();
+    views::start_menu_compare();
     get_files()
-}
-
-/// Run the menu layout.
-fn start_menu() {
-    utils::clear_screen();
-    println!("###############################################");
-    println!("#                                             #");
-    println!("#                Compare Files!               #");
-    println!("#                                             #");
-    println!("###############################################");
 }
 
 fn get_files() {

@@ -1,10 +1,9 @@
+use crate::{utils, views};
 mod compare;
 mod search;
 
-use crate::utils;
-
 pub fn main() {
-    start_menu();
+    views::start_menu_file();
     'main_loop: loop {
         println!("Enter your option: ");
         let user_input = utils::get_user_input();
@@ -19,26 +18,7 @@ pub fn main() {
                 utils::clear_screen()
             }
         }
-        start_menu();
+        views::start_menu_file();
     }
     utils::clear_screen();
-}
-
-/// Run the menu layout.
-fn start_menu() {
-    utils::clear_screen();
-    println!("###############################################");
-    println!("#                                             #");
-    println!("#                File Manager                 #");
-    println!("#                                             #");
-    println!("###############################################");
-    println!("###############################################");
-    println!("#                                             #");
-    println!("#  Select an operation:                       #");
-    println!("#                                             #");
-    println!("#     '1' -> Search in File                   #");
-    println!("#     '2' -> Compare two files                #");
-    println!("#                                             #");
-    println!("#     'Q' -> Exit                             #");
-    println!("###############################################");
 }

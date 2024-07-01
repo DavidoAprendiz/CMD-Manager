@@ -1,8 +1,8 @@
-use crate::utils;
+use crate::{utils, views};
 use reqwest::blocking::get;
 
 pub fn main() {
-    menu();
+    views::start_menu_webreq();
     println!("Enter your option: ");
     let user_input = utils::get_user_input();
 
@@ -11,18 +11,6 @@ pub fn main() {
         "2" => get_price_data("cardano".to_string()),
         _ => (),
     }
-}
-
-fn menu() {
-    utils::clear_screen();
-    println!("###############################################");
-    println!("#                 Price data!                 #");
-    println!("###############################################");
-    println!("#  Select an operation:                       #");
-    println!("#                                             #");
-    println!("#     '1' -> Get Ergo Price                   #");
-    println!("#     '2' -> Get Cardano Price                #");
-    println!("###############################################");
 }
 
 fn get_price_data(name: String) {

@@ -1,19 +1,9 @@
-use crate::utils;
+use crate::{utils, views};
 use std::fs;
 
 pub fn main() {
-    start_menu();
+    views::start_menu_search();
     get_pattern();
-}
-
-/// Run the menu layout.
-fn start_menu() {
-    utils::clear_screen();
-    println!("###############################################");
-    println!("#                                             #");
-    println!("#               Search in File!               #");
-    println!("#                                             #");
-    println!("###############################################");
 }
 
 fn get_pattern() {

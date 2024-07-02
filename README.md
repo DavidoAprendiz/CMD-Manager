@@ -10,6 +10,10 @@
 
 ---
 
+<p align="center">
+<img alt="CMD-Manage" src="https://github.com/DavidoAprendiz/CMD-Manager/assets/21132833/cf467918-65ea-4c39-9886-d28a4ab5be85">
+</p>
+
 ## Description
 
 An **AiO(all-in-one)** command-line application (but with colors 😃) focused on privacy because privacy matters!
@@ -24,7 +28,7 @@ You can find the following tools:
 - **Web Manager**
   - Download Mode - Download simple data from web to your local drive.
   - Get API Mode - Get the current price of Ergo and Cardano.
-- **Brain Manager** (in-progress)
+- **Brain Manager (in-progress)**
   - Talk with **your own** AI and save the history to **your own** database.
   - Search and manage all your history.
 

@@ -1,8 +1,12 @@
 use crate::{utils, views};
 use reqwest::blocking::get;
 
+const CLOSE: &str = utils::CLOSE;
+const BLUE: &str = utils::BLUE;
+const CYAN_UNDERLINE_BOLD: &str = utils::CYAN_UNDERLINE_BOLD;
+
 pub fn main() {
-    views::start_menu_webreq();
+    views::start_menu_web_request();
     println!("Enter your option: ");
     let user_input = utils::get_user_input();
 
@@ -20,17 +24,18 @@ fn get_price_data(name: String) {
     );
 
     let url_response = get(url)
-        .expect("Failed to process request.")
+        .expect("\x1b[0m\x1b[31;3mFailed to process request.\x1b[0m")
         .text()
-        .expect("Failed to display json.");
+        .expect("\x1b[0m\x1b[31;3mFailed to display json.\x1b[0m");
 
     println!(
-        "{} is currently @ {:.5}€",
-        &name,
+        "\n{CYAN_UNDERLINE_BOLD}{} is currently @ {:.5}€{CLOSE}",
+        &name.to_uppercase(),
         &url_response
             .replace("{\"ergo\":{\"eur\":", "")
             .replace("{\"cardano\":{\"eur\":", "")
             .replace("}}", "")
     );
-    utils::get_user_input(); //to wait
+    println!("{BLUE}Press ENTER to exit...{CLOSE}");
+    utils::get_user_input();
 }

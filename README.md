@@ -47,6 +47,6 @@ Rust (Programming Language)
 ### Install / Clone
 
 - Open a terminal and clone the repository
-  - `git clone https://github.com/DavidoAprendiz/cmd-manager`
+  - `git clone https://github.com/DavidoAprendiz/CMD-Manager.git`
 - Enter the directory and run Cargo:
   - `cargo run`

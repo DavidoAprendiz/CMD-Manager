@@ -1,6 +1,13 @@
 use chrono::Local;
 use std::{env, io, process};
 
+// Color configuration
+pub const CLOSE: &str = "\x1b[0m";
+pub const BLUE: &str = "\x1b[0m\x1b[34m";
+pub const CYAN_UNDERLINE: &str = "\x1b[0m\x1b[36;4m";
+pub const CYAN_UNDERLINE_BOLD: &str = "\x1b[0m\x1b[36;1;4m";
+pub const ERRO: &str = "\x1b[0m\x1b[31;3m";
+
 /// Get user input for 'Menus'.
 pub fn get_user_input() -> String {
     let mut user_input = String::new();
@@ -18,12 +25,12 @@ pub fn clear_screen() {
     if env::consts::OS.contains("windows") {
         match process::Command::new("cmd").args(["/c", "cls"]).status() {
             Ok(_) => (),
-            Err(e) => println!("Failed to clear the screen.\n{e}\n"),
+            Err(e) => println!("{ERRO}Failed to clear the screen.\n{e}{CLOSE}\n"),
         }
     } else {
         match process::Command::new("clear").status() {
             Ok(_) => (),
-            Err(e) => println!("Failed to clear the screen.\n{e}\n"),
+            Err(e) => println!("{ERRO}Failed to clear the screen.\n{e}{CLOSE}\n"),
         }
     }
 }
@@ -33,9 +40,9 @@ pub fn exit_program(input: &str) -> bool {
     if input.trim().to_lowercase().starts_with('q') || input.trim().to_lowercase().starts_with('e')
     {
         clear_screen();
-        println!("\n###############################################");
-        println!("#                  Exiting...                 #");
-        println!("###############################################\n");
+        println!("\n{BLUE}###############################################");
+        println!("#                  {CYAN_UNDERLINE_BOLD}Exiting...{BLUE}                 #");
+        println!("###############################################{CLOSE}\n");
         return true;
     }
     false
@@ -55,7 +62,7 @@ pub fn get_file_path(user_file: String) -> String {
     format!(
         "{}{}{}",
         std::env::current_dir()
-            .expect("Failed to access current directory.\n")
+            .expect("\x1b[0m\x1b[31;3mFailed to access current directory.\x1b[0m\n")
             .display(),
         get_os(),
         user_file
@@ -67,13 +74,13 @@ pub fn create_folder(path: String) {
     match std::fs::create_dir_all(format!(
         "{}{}{}",
         std::env::current_dir()
-            .expect("Failed to access current directory.\n")
+            .expect("\x1b[0m\x1b[31;3mFailed to access current directory.\x1b[0m\n")
             .display(),
         path,
         get_os()
     )) {
         Ok(_) => {}
-        Err(e) => println!("Failed to create folder '{path}'.\n{e}\n"),
+        Err(e) => println!("{ERRO}Failed to create folder '{path}'.\n{e}{CLOSE}\n"),
     }
 }
 
@@ -91,13 +98,13 @@ pub fn get_files_from_folder(user_path: String) {
                     }
                     Err(e) => {
                         println!(
-                            "Failed to read the name of the files in current folder.\nError: {e}\n"
+                            "{ERRO}Failed to read the name of the files in current folder.\nError: {e}{CLOSE}\n"
                         )
                     }
                 }
             }
         }
-        Err(e) => println!("Failed to read the current folder.\nError: {e}\n"),
+        Err(e) => println!("{ERRO}Failed to read the current folder.\nError: {e}{CLOSE}\n"),
     }
     println!();
 }

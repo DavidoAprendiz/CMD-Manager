@@ -7,7 +7,6 @@ pub fn main() {
     'main_loop: loop {
         println!("Enter your option: ");
         let user_input = utils::get_user_input();
-
         match user_input.trim() {
             "1" => download::main(),
             "2" => web_req::main(),

@@ -1,3 +1,4 @@
+mod brain; // Brain Manager
 mod file; // File Manager
 mod todo; // Todo Manager
 mod utils; // Common functions
@@ -14,6 +15,7 @@ fn main() {
             "1" => todo::main(),
             "2" => file::main(),
             "3" => web::main(),
+            "4" => brain::main(),
             _ => {
                 if utils::exit_program(&user_input) {
                     break 'main_loop;

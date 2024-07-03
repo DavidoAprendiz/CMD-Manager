@@ -1,7 +1,7 @@
 <h1 align="center">CMD-Manager</h1>
 
 <p align="center">
-<img alt="CMD-Manager 0.2.0" src="https://img.shields.io/badge/cmd_manager-0.2.0-000000?style=for-the-badge&color=blue">
+<img alt="CMD-Manager 0.2.1" src="https://img.shields.io/badge/cmd_manager-0.2.1-000000?style=for-the-badge&color=blue">
 <img alt="Rust CI" src="https://github.com/DavidoAprendiz/Rust-in-Progress/actions/workflows/rust.yml/badge.svg">
 </p>
 
@@ -17,6 +17,7 @@
 ## Description
 
 An **AiO(all-in-one)** command-line application (but with colors 😃) focused on privacy because privacy matters!
+Made with Rust, SQLite and Ollama.
 
 You can find the following tools:
 
@@ -40,9 +41,15 @@ Feel free to contribute!
 
 ### Pre-requirements
 
-Rust (Programming Language)
+Rust
 
-- Install the latest [Rust](https://www.rust-lang.org/learn/get-started)
+- To run the program
+  - Install the latest [Rust](https://www.rust-lang.org/learn/get-started)
+
+Ollama
+
+- To run Brain module (in-progress)
+  - Install Llama3 in [Ollama](https://ollama.com/)
 
 ### Install / Clone
 
@@ -50,3 +57,20 @@ Rust (Programming Language)
   - `git clone https://github.com/DavidoAprendiz/CMD-Manager.git`
 - Enter the directory and run Cargo:
   - `cargo run`
+
+## Roadmap
+
+- [X] Todo Manager
+  - [X] Manage tasks (add/view/delete).
+- [X] File Manager
+  - [X] Search in files.
+  - [X] Compare two files.
+- [X] Web Manager
+  - [X] Download files.
+  - [X] Get data from APIs.
+- [X] Improve TUI (just a little)
+- [X] Add SQLite.
+- [ ] Unit tests (for best practices).
+- [ ] Brain Manager
+  - [ ] Brainstorm with your personal AI.
+  - [ ] Manage history (search/view/delete).

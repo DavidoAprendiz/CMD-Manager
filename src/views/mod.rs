@@ -22,6 +22,9 @@ pub fn start_menu_main() {
     println!(
         "#     {CYAN_UNDERLINE}3{BLUE} -> {CYAN_UNDERLINE}Web Manager{BLUE}                        #"
     );
+    println!(
+        "#     {CYAN_UNDERLINE}4{BLUE} -> {CYAN_UNDERLINE}Brain Manager{BLUE}                      #"
+    );
     println!("#                                             #");
     println!(
         "#     {CYAN_UNDERLINE}Q{BLUE} -> {CYAN_UNDERLINE}Exit{BLUE}                               #"
@@ -167,5 +170,29 @@ pub fn start_menu_web_request() {
     println!("#                                             #");
     println!("#     {CYAN_UNDERLINE}1{BLUE} -> {CYAN_UNDERLINE}Get Ergo Price{BLUE}                     #");
     println!("#     {CYAN_UNDERLINE}2{BLUE} -> {CYAN_UNDERLINE}Get Cardano Price{BLUE}                  #");
+    println!("#                                             #");
+    println!("#     {CYAN_UNDERLINE}Q{BLUE} -> {CYAN_UNDERLINE}Exit{BLUE}                               #");
+    println!("###############################################{CLOSE}");
+}
+
+//
+// .BRAIN MANAGER
+//
+
+// Brain menu
+pub fn start_menu_db() {
+    utils::clear_screen();
+    println!("{BLUE}###############################################");
+    println!("#                                             #");
+    println!("#                 {CYAN_UNDERLINE_BOLD}Brain Manager!{BLUE}              #");
+    println!("#                                             #");
+    println!("###############################################");
+    println!("#                                             #");
+    println!("#     {CYAN_UNDERLINE}1{BLUE} -> {CYAN_UNDERLINE}Add timestamp{BLUE}                      #");
+    println!(
+        "#     {CYAN_UNDERLINE}2{BLUE} -> {CYAN_UNDERLINE}Show all{BLUE}                           #"
+    );
+    println!("#                                             #");
+    println!("#     {CYAN_UNDERLINE}Q{BLUE} -> {CYAN_UNDERLINE}Exit{BLUE}                               #");
     println!("###############################################{CLOSE}");
 }

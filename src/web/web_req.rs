@@ -1,10 +1,14 @@
 use crate::{utils, views};
 use reqwest::blocking::get;
 
+// Define constants for colors (change colors in utils.rs)
 const CLOSE: &str = utils::CLOSE;
 const BLUE: &str = utils::BLUE;
 const CYAN_UNDERLINE_BOLD: &str = utils::CYAN_UNDERLINE_BOLD;
 
+/// Web Request
+///
+/// Start menu layout, ask user input, run API (if applicable)
 pub fn main() {
     views::start_menu_web_request();
     println!("Enter your option: ");
@@ -17,6 +21,7 @@ pub fn main() {
     }
 }
 
+/// Get the price data from CoinGecko API.
 fn get_price_data(name: String) {
     let url = format!(
         "https://api.coingecko.com/api/v3/simple/price?ids={}&vs_currencies=eur",

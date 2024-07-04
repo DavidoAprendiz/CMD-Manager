@@ -1,6 +1,7 @@
 use crate::{todo, utils, views};
 use std::fs;
 
+// Define constants for colors (change colors in utils.rs)
 const CLOSE: &str = utils::CLOSE;
 const BLUE: &str = utils::BLUE;
 const CYAN_UNDERLINE: &str = utils::CYAN_UNDERLINE;
@@ -9,7 +10,6 @@ const ERRO: &str = utils::ERRO;
 
 /// Delete the task specified by the user.
 pub fn remove_task() {
-    utils::clear_screen();
     views::start_menu_todo_remove();
     utils::get_files_from_folder(todo::tasks_folder());
 

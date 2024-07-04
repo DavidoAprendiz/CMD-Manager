@@ -3,10 +3,14 @@ use similar::TextDiff;
 use std::fs;
 extern crate similar;
 
+// Define constants for colors (change colors in utils.rs)
 const CLOSE: &str = utils::CLOSE;
 const BLUE: &str = utils::BLUE;
 const CYAN_UNDERLINE: &str = utils::CYAN_UNDERLINE;
 
+/// Compare
+///
+/// Start menu layout, begin loop, ask user input or exit program
 pub fn main() {
     views::start_menu_compare();
     get_files()

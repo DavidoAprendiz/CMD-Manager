@@ -39,7 +39,6 @@ pub fn clear_screen() {
 pub fn exit_program(input: &str) -> bool {
     if input.trim().to_lowercase().starts_with('q') || input.trim().to_lowercase().starts_with('e')
     {
-        clear_screen();
         println!("\n{BLUE}###############################################");
         println!("#                  {CYAN_UNDERLINE_BOLD}Exiting...{BLUE}                 #");
         println!("###############################################{CLOSE}\n");
@@ -112,4 +111,32 @@ pub fn get_files_from_folder(user_path: String) {
 /// Calculate the Hours and Minutes from 'seconds_from_midnight'. Return a String and is used in 'save_task(), as example.'.
 pub fn get_current_time() -> String {
     Local::now().format("%d-%m-%Y-%H_%M_%S").to_string()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn _exit_program() {
+        let input = "quit12345qwerty";
+        let input2 = "exit12345qwerty";
+        assert!(exit_program(input));
+        assert!(exit_program(input2));
+    }
+
+    #[test]
+    fn _get_os() {
+        if env::consts::OS.contains("windows") {
+            assert!(get_os().contains('\\'));
+        } else {
+            assert!(get_os().contains('/'));
+        }
+    }
+
+    #[test]
+    fn _get_current_time() {
+        let current_time = get_current_time();
+        assert!(!current_time.is_empty());
+    }
 }

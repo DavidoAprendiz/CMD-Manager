@@ -1,5 +1,6 @@
 use crate::utils;
 
+// Define constants for colors (change colors in utils.rs)
 const CLOSE: &str = utils::CLOSE;
 const BLUE: &str = utils::BLUE;
 const CYAN_UNDERLINE: &str = utils::CYAN_UNDERLINE;
@@ -7,6 +8,7 @@ const CYAN_UNDERLINE_BOLD: &str = utils::CYAN_UNDERLINE_BOLD;
 
 /// Main menu
 pub fn start_menu_main() {
+    utils::clear_screen();
     println!("{BLUE}###############################################");
     println!("#                                             #");
     println!("#           {CYAN_UNDERLINE_BOLD}Welcome to CMD-Manager!{BLUE}           #");
@@ -96,6 +98,7 @@ pub fn start_menu_todo() {
 
 /// Todo New Task
 pub fn start_menu_todo_new() {
+    utils::clear_screen();
     println!("{BLUE}###############################################");
     println!("#              {CYAN_UNDERLINE_BOLD}Create a new task!{BLUE}             #");
     println!("###############################################{CLOSE}\n");
@@ -110,6 +113,7 @@ pub fn start_menu_todo_saved() {
 
 /// Todo All Saved Tasks
 pub fn start_menu_todo_all() {
+    utils::clear_screen();
     println!("{BLUE}###############################################");
     println!("#                  {CYAN_UNDERLINE_BOLD}All Tasks!{BLUE}                 #");
     println!("###############################################{CLOSE}\n");
@@ -117,6 +121,7 @@ pub fn start_menu_todo_all() {
 
 /// Todo View Task
 pub fn start_menu_todo_view() {
+    utils::clear_screen();
     println!("{BLUE}###############################################");
     println!("#              {CYAN_UNDERLINE_BOLD}View your tasks!{BLUE}               #");
     println!("###############################################{CLOSE}\n");
@@ -124,6 +129,7 @@ pub fn start_menu_todo_view() {
 
 /// Todo Remove Task
 pub fn start_menu_todo_remove() {
+    utils::clear_screen();
     println!("{BLUE}###############################################");
     println!("#                {CYAN_UNDERLINE_BOLD}Remove a task!{BLUE}               #");
     println!("###############################################{CLOSE}\n");

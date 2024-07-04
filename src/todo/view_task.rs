@@ -1,6 +1,7 @@
 use crate::{todo, utils, views};
 use std::{env, fs};
 
+// Define constants for colors (change colors in utils.rs)
 const CLOSE: &str = utils::CLOSE;
 const BLUE: &str = utils::BLUE;
 const CYAN_UNDERLINE: &str = utils::CYAN_UNDERLINE;
@@ -9,7 +10,6 @@ const ERRO: &str = utils::ERRO;
 
 /// Function to view selected task
 pub fn view_task() {
-    utils::clear_screen();
     views::start_menu_todo_view();
     utils::get_files_from_folder(todo::tasks_folder());
     println!("{CYAN_UNDERLINE}Please insert the task name:{CLOSE}");

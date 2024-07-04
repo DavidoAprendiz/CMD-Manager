@@ -5,8 +5,10 @@ mod utils; // Common functions
 mod views; // Application views
 mod web; // Web Manager
 
+/// Application main loop
+///
+/// Start menu layout, begin loop, ask user input or exit program
 fn main() {
-    utils::clear_screen();
     views::start_menu_main();
     'main_loop: loop {
         println!("Enter your option: ");

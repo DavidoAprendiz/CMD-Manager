@@ -1,13 +1,13 @@
 use crate::{todo, utils, views};
 use std::{fs, io, io::Write};
 
+// Define constants for colors (change colors in utils.rs)
 const CLOSE: &str = utils::CLOSE;
 const BLUE: &str = utils::BLUE;
 const CYAN_UNDERLINE: &str = utils::CYAN_UNDERLINE;
 
 /// Create a new task with the user input. Generate field 'task_name' and 'task'.
 pub fn add_task() {
-    utils::clear_screen();
     views::start_menu_todo_new();
     println!("{CYAN_UNDERLINE}Please insert the task name:{CLOSE}");
 

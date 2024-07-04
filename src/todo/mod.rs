@@ -5,6 +5,9 @@ mod remove_task;
 mod show_task;
 mod view_task;
 
+/// Todo Manager
+///
+/// Start menu layout, begin loop, ask user input or exit program
 pub fn main() {
     utils::create_folder(tasks_folder());
     views::start_menu_todo();
@@ -27,10 +30,28 @@ pub fn main() {
     utils::clear_screen();
 }
 
+/// Get folder Tasks path
 fn tasks_folder() -> String {
     if env::consts::OS.contains("windows") {
         "\\Project\\Tasks\\".to_string()
     } else {
         "/Project/Tasks/".to_string()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn _tasks_folder() {
+        assert_eq!(
+            tasks_folder(),
+            if env::consts::OS.contains("windows") {
+                "\\Project\\Tasks\\".to_string()
+            } else {
+                "/Project/Tasks/".to_string()
+            }
+        );
     }
 }

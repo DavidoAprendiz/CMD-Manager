@@ -2,15 +2,19 @@ use crate::{utils, views};
 use sqlite::State;
 use std::env;
 
+// Constants for databases
 const DB_NAME: &str = "LOGIN_HIST";
+// Constants for tables
 const LAST_LOGIN: &str = "last_login";
 
+/// Brain Manager
+///
+/// Start menu layout, begin loop, ask user input or exit program
+/// Automatically create a database (if does't exist) and a timestamp is added.
 pub fn main() {
+    // Create folder 'Database' and the database file, if doesn't exist
     utils::create_folder(db_folder());
-    // Create DB, if doesn't exist
-    query_create_db(DB_NAME);
-
-    // Add "last-login" timestamp
+    query_create_db(DB_NAME, LAST_LOGIN);
     query_add_timestamp(DB_NAME);
     views::start_menu_db();
     'main_loop: loop {
@@ -30,6 +34,7 @@ pub fn main() {
     utils::clear_screen();
 }
 
+/// Create folder Database (if does't exist) and verify the running operating system (OS) and return the correct path.
 fn db_folder() -> String {
     let operating_system = env::consts::OS;
     if operating_system.contains("windows") {
@@ -39,18 +44,20 @@ fn db_folder() -> String {
     }
 }
 
-fn query_create_db(db_name: &str) {
+/// Create a table with a specific name.
+fn query_create_db(db_name: &str, db_table: &str) {
     let path = utils::get_file_path(format!("{}database.db", db_folder()));
     let conn = sqlite::open(path).unwrap();
 
-    let query = format!("CREATE TABLE {db_name} ({LAST_LOGIN} TEXT);");
+    let query = format!("CREATE TABLE {db_name} ({db_table} TEXT);");
 
     match conn.execute(query) {
         Ok(_) => (),
-        Err(e) => println!("\nDatabase table already created.\n{e}\n"),
+        Err(e) => println!("\nTable {db_table} already created.\n{e}\n"),
     };
 }
 
+/// Insert data 'timestamp' to 'LAST_LOGON' table
 fn query_add_timestamp(db_name: &str) {
     let path = utils::get_file_path(format!("{}database.db", db_folder()));
     let conn = sqlite::open(path).unwrap();
@@ -61,16 +68,12 @@ fn query_add_timestamp(db_name: &str) {
     "
     );
     match conn.execute(query) {
-        Ok(_) => {
-            utils::clear_screen();
-            println!("Timestamp added!");
-            println!("Press ENTER to continue...");
-            utils::get_user_input();
-        }
+        Ok(_) => (),
         Err(e) => println!("\n{e}\n"),
     };
 }
 
+/// Get all data from a 'LAST_LOGON' table
 fn query_show_all(db_name: &str) {
     let path = utils::get_file_path(format!("{}database.db", db_folder()));
     let conn = sqlite::open(path).unwrap();
@@ -89,4 +92,21 @@ fn query_show_all(db_name: &str) {
     println!("\n########################\n");
     println!("Press ENTER to continue...");
     utils::get_user_input();
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn _db_folder() {
+        assert_eq!(
+            db_folder(),
+            if env::consts::OS.contains("windows") {
+                "\\Project\\Database\\".to_string()
+            } else {
+                "/Project/Database/".to_string()
+            }
+        );
+    }
 }

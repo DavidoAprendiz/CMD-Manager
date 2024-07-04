@@ -2,6 +2,9 @@ use crate::{utils, views};
 mod download;
 mod web_req;
 
+/// Web Manager
+///
+/// Start menu layout, begin loop, ask user input or exit program
 pub fn main() {
     views::start_menu_web();
     'main_loop: loop {

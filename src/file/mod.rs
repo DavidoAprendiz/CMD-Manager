@@ -2,6 +2,9 @@ use crate::{utils, views};
 mod compare;
 mod search;
 
+/// File Manager
+///
+/// Start menu layout, begin loop, ask user input or exit program
 pub fn main() {
     views::start_menu_file();
     'main_loop: loop {

@@ -11,7 +11,7 @@
 ---
 
 <p align="center">
-<img alt="CMD-Manage" src="https://github.com/DavidoAprendiz/CMD-Manager/assets/21132833/cf467918-65ea-4c39-9886-d28a4ab5be85">
+<img alt="CMD-Manage" src="https://github.com/DavidoAprendiz/CMD-Manager/assets/21132833/07356fdb-9ce9-4905-b02a-f7db84287af6">
 </p>
 
 ## Description
@@ -70,7 +70,7 @@ Ollama
   - [X] Get data from APIs.
 - [X] Improve TUI (just a little)
 - [X] Add SQLite.
-- [ ] Unit tests (for best practices).
-- [ ] Brain Manager
+- [X] Unit tests (for best practices).
+- [ ] **Brain Manager (in-progress)**
   - [ ] Brainstorm with your personal AI.
   - [ ] Manage history (search/view/delete).

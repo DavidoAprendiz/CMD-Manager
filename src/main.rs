@@ -10,6 +10,7 @@ mod web; // Web Manager
 /// Start menu layout, begin loop, ask user input or exit program
 fn main() {
     views::start_menu_main();
+    start_db();
     'main_loop: loop {
         println!("Enter your option: ");
         let user_input = utils::get_user_input();
@@ -27,4 +28,13 @@ fn main() {
         }
         views::start_menu_main();
     }
+}
+
+/// Create tables (if not exists).
+///
+/// Add timestamp to TB_SECURITY
+fn start_db() {
+    brain::queries::q_security_create_table();
+    brain::queries::q_brain_create_table();
+    brain::queries::q_security_add_timestamp();
 }

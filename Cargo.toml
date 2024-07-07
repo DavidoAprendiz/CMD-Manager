@@ -2,7 +2,8 @@
 name = "cmd-manager"
 categories = ["command-line-utilities"]
 repository = "https://github.com/DavidoAprendiz/CMD-Manager"
-version = "0.1.0"
+version = "0.3.0"
+readme = "README.md"
 edition = "2021"
 
 [dependencies]

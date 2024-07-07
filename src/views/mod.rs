@@ -186,7 +186,7 @@ pub fn start_menu_web_request() {
 //
 
 // Brain menu
-pub fn start_menu_db() {
+pub fn start_menu_brain() {
     utils::clear_screen();
     println!("{BLUE}###############################################");
     println!("#                                             #");
@@ -194,11 +194,28 @@ pub fn start_menu_db() {
     println!("#                                             #");
     println!("###############################################");
     println!("#                                             #");
-    println!("#     {CYAN_UNDERLINE}1{BLUE} -> {CYAN_UNDERLINE}Add timestamp{BLUE}                      #");
+    println!("#     {CYAN_UNDERLINE}1{BLUE} -> {CYAN_UNDERLINE}Ask questions{BLUE}                      #");
     println!(
-        "#     {CYAN_UNDERLINE}2{BLUE} -> {CYAN_UNDERLINE}Show all{BLUE}                           #"
+        "#     {CYAN_UNDERLINE}2{BLUE} -> {CYAN_UNDERLINE}Search Q&A in DB{BLUE}                   #"
+    );
+    println!(
+        "#     {CYAN_UNDERLINE}3{BLUE} -> {CYAN_UNDERLINE}Show all talks history{BLUE}             #"
+    );
+    println!(
+        "#     {CYAN_UNDERLINE}4{BLUE} -> {CYAN_UNDERLINE}Show all security history{BLUE}          #"
     );
     println!("#                                             #");
     println!("#     {CYAN_UNDERLINE}Q{BLUE} -> {CYAN_UNDERLINE}Exit{BLUE}                               #");
     println!("###############################################{CLOSE}");
+}
+
+// Brain/New menu
+pub fn start_menu_brain_new_talk() {
+    utils::clear_screen();
+    println!("{BLUE}###############################################");
+    println!("#                                             #");
+    println!("#               {CYAN_UNDERLINE_BOLD}Let's brainstorm!{BLUE}             #");
+    println!("#                                             #");
+    println!("###############################################");
+    println!("{CYAN_UNDERLINE}What's your question?{CLOSE}");
 }

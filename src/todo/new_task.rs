@@ -20,18 +20,11 @@ pub fn add_task() {
     io::stdin()
         .read_line(&mut task)
         .expect("\x1b[0m\x1b[31;3mFailed to get 'task description'.\x1b[0m\n");
-    println!("\n{BLUE}###############################################{CLOSE}");
     save_task(task_name, task);
 }
 
 /// Save task to disk via User inputs.
 fn save_task(user_task_name: String, user_task: String) {
-    println!(
-        "\n{CYAN_UNDERLINE}Task Name ->{CLOSE}  {}\n{CYAN_UNDERLINE}Task Description ->{CLOSE} {}\n",
-        &user_task_name.trim(),
-        &user_task.trim()
-    );
-
     let path: String = {
         format!(
             "{}{}{}.txt",

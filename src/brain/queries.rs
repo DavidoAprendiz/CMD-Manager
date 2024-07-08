@@ -11,8 +11,16 @@ const DATABASE: &str = "database.db";
 const TB_SECURITY: &str = "SECURITY_HIST";
 const TB_BRAIN: &str = "BRAIN_HIST";
 
-// Constants for columns
+// Constants for shared columns
 const CL_TIMESTAMP: &str = "timestamp";
+// Constants for SECURITY_HIST columns
+const CL_REASON: &str = "reasons";
+pub const SYSTEM_LOGON: &str = "system_logon";
+pub const TODO_LOGON: &str = "todo_logon";
+pub const FILE_LOGON: &str = "file_logon";
+pub const WEB_LOGON: &str = "web_logon";
+pub const BRAIN_LOGON: &str = "brain_logon";
+// Constants for BRAIN columns
 const CL_QUESTIONS: &str = "questions";
 const CL_ANSWERS: &str = "answers";
 
@@ -25,6 +33,8 @@ pub fn start_new_talk() {
     views::start_menu_brain_new_talk();
     let user_input = utils::get_user_input();
 
+    println!("\n... waiting response ...\n");
+
     let comm = String::from_utf8(
         Command::new("/usr/local/bin/ollama")
             .args(["run", "llama3"])
@@ -36,17 +46,25 @@ pub fn start_new_talk() {
     .ok()
     .unwrap()
     .replace('\'', "´")
-    .replace('\n', "<br>");
+    .replace('\n', " <br>")
+    .replace('\"', "´");
 
     q_brain_add_talk(user_input.to_owned(), comm.to_owned());
 
-    println!("\nSave to Markdown file? (Yes or No?)");
+    println!("\nSave to Markdown file?\n(Write 'Yes' or press ENTER to continue...)");
+
     let save = utils::get_user_input();
     if save.to_lowercase().starts_with('y') {
-        talk_save_to_md(user_input, comm)
+        talk_save_to_md(
+            user_input
+                .replace('\'', "´")
+                .replace('\n', " <br>")
+                .replace('\"', "´"),
+            comm,
+        );
+        println!("Press ENTER to continue...");
+        utils::get_user_input();
     }
-    println!("\nPress ENTER to continue...");
-    utils::get_user_input();
 }
 
 /// Save conversation to a Markdown file
@@ -83,20 +101,22 @@ pub fn q_security_create_table() {
     let path = utils::get_file_path(format!("{}{}", db_folder(), DATABASE));
     let conn = sqlite::open(path).unwrap();
 
-    let query = format!("CREATE TABLE IF NOT EXISTS {TB_SECURITY} ({CL_TIMESTAMP} TEXT);");
+    let query = format!(
+        "CREATE TABLE IF NOT EXISTS {TB_SECURITY} ({CL_TIMESTAMP} TEXT, {CL_REASON} TEXT);"
+    );
 
     conn.execute(query)
         .expect("Failed to execute query! 'q_security_create_table()'\n");
 }
 
-/// Insert data 'timestamp' to 'TB_SECURITY' table
-pub fn q_security_add_timestamp() {
+/// Insert 'reason'  to 'TB_SECURITY' table.
+pub fn q_security_add_security_timestamps(reason: &str) {
     let path = utils::get_file_path(format!("{}{}", db_folder(), DATABASE));
     let conn = sqlite::open(path).unwrap();
     let query = format!(
         "
-    INSERT INTO {TB_SECURITY} ({CL_TIMESTAMP}) 
-    VALUES (datetime(CURRENT_TIMESTAMP,'localtime'));
+    INSERT INTO {TB_SECURITY} ({CL_TIMESTAMP}, {CL_REASON}) 
+    VALUES (datetime(CURRENT_TIMESTAMP,'localtime'), '{reason}');
     "
     );
     conn.execute(query)
@@ -114,11 +134,12 @@ pub fn q_security_show_all() {
     statement.iter();
 
     println!("\n########################");
-    println!("TABLE: {TB_SECURITY}\n Column: {CL_TIMESTAMP} History\n");
+    println!("TABLE: {TB_SECURITY}\n Columns: {CL_TIMESTAMP} | {CL_REASON}\n");
     while let Ok(State::Row) = statement.next() {
         println!(
-            "timestamp = {}",
+            "> {} | {}",
             statement.read::<String, _>(CL_TIMESTAMP).unwrap(),
+            statement.read::<String, _>(CL_REASON).unwrap(),
         );
     }
     println!("\n########################\n");
@@ -153,11 +174,10 @@ pub fn q_brain_add_talk(question: String, answer: String) {
         "
     INSERT INTO {TB_BRAIN} ({CL_TIMESTAMP}, {CL_QUESTIONS}, {CL_ANSWERS}) 
     VALUES (datetime(CURRENT_TIMESTAMP,'localtime'), '{:?}', '{:?}' );",
-        r#question.replace('\'', "´").replace('\n', "<br>"),
-        r#answer.replace('\'', "´").replace('\n', "<br>"),
+        r#question, r#answer
     );
 
-    println!("{:?}", r#answer.replace('\'', "´"));
+    println!("{:?}", r#answer);
 
     conn.execute(query)
         .expect("Failed to execute query! 'q_brain_add_talk()'");

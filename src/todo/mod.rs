@@ -1,4 +1,4 @@
-use crate::{utils, views};
+use crate::{brain, utils, views};
 use std::env;
 mod new_task;
 mod remove_task;
@@ -9,6 +9,7 @@ mod view_task;
 ///
 /// Start menu layout, begin loop, ask user input or exit program
 pub fn main() {
+    brain::queries::q_security_add_security_timestamps(brain::queries::TODO_LOGON);
     utils::create_folder(tasks_folder());
     views::start_menu_todo();
     'main_loop: loop {
@@ -17,8 +18,8 @@ pub fn main() {
         match user_input.trim() {
             "1" => new_task::add_task(),
             "2" => remove_task::remove_task(),
-            "3" => show_task::show_task(),
-            "4" => view_task::view_task(),
+            "3" => view_task::view_task(),
+            "4" => show_task::show_task(),
             _ => {
                 if utils::exit_program(&user_input) {
                     break 'main_loop;

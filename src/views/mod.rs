@@ -29,7 +29,7 @@ pub fn start_menu_main() {
     );
     println!("#                                             #");
     println!(
-        "#     {CYAN_UNDERLINE}Q{BLUE} -> {CYAN_UNDERLINE}Exit{BLUE}                               #"
+        "#     {CYAN_UNDERLINE}E{BLUE} -> {CYAN_UNDERLINE}Exit{BLUE}                               #"
     );
     println!("###############################################{CLOSE}");
 }
@@ -50,7 +50,7 @@ pub fn start_menu_file() {
     println!("#     {CYAN_UNDERLINE}1{BLUE} -> {CYAN_UNDERLINE}Search in File{BLUE}                     #");
     println!("#     {CYAN_UNDERLINE}2{BLUE} -> {CYAN_UNDERLINE}Compare two files{BLUE}                  #");
     println!("#                                             #");
-    println!("#     {CYAN_UNDERLINE}Q{BLUE} -> {CYAN_UNDERLINE}Exit{BLUE}                               #");
+    println!("#     {CYAN_UNDERLINE}E{BLUE} -> {CYAN_UNDERLINE}Exit{BLUE}                               #");
     println!("###############################################{CLOSE}");
 }
 
@@ -89,10 +89,10 @@ pub fn start_menu_todo() {
     println!("#                                             #");
     println!("#     {CYAN_UNDERLINE}1{BLUE} -> {CYAN_UNDERLINE}New Task{BLUE}                           #");
     println!("#     {CYAN_UNDERLINE}2{BLUE} -> {CYAN_UNDERLINE}Remove Task{BLUE}                        #");
-    println!("#     {CYAN_UNDERLINE}3{BLUE} -> {CYAN_UNDERLINE}Show All Tasks{BLUE}                     #");
-    println!("#     {CYAN_UNDERLINE}4{BLUE} -> {CYAN_UNDERLINE}View Task{BLUE}                          #");
+    println!("#     {CYAN_UNDERLINE}3{BLUE} -> {CYAN_UNDERLINE}View Task{BLUE}                          #");
+    println!("#     {CYAN_UNDERLINE}4{BLUE} -> {CYAN_UNDERLINE}Show All Tasks{BLUE}                     #");
     println!("#                                             #");
-    println!("#     {CYAN_UNDERLINE}Q{BLUE} -> {CYAN_UNDERLINE}Exit{BLUE}                               #");
+    println!("#     {CYAN_UNDERLINE}E{BLUE} -> {CYAN_UNDERLINE}Exit{BLUE}                               #");
     println!("###############################################{CLOSE}\n");
 }
 
@@ -151,7 +151,7 @@ pub fn start_menu_web() {
     println!("#     {CYAN_UNDERLINE}1{BLUE} -> {CYAN_UNDERLINE}Download files{BLUE}                     #");
     println!("#     {CYAN_UNDERLINE}2{BLUE} -> {CYAN_UNDERLINE}Get price data{BLUE}                     #");
     println!("#                                             #");
-    println!("#     {CYAN_UNDERLINE}Q{BLUE} -> {CYAN_UNDERLINE}Exit{BLUE}                               #");
+    println!("#     {CYAN_UNDERLINE}E{BLUE} -> {CYAN_UNDERLINE}Exit{BLUE}                               #");
     println!("###############################################{CLOSE}");
 }
 
@@ -177,7 +177,7 @@ pub fn start_menu_web_request() {
     println!("#     {CYAN_UNDERLINE}1{BLUE} -> {CYAN_UNDERLINE}Get Ergo Price{BLUE}                     #");
     println!("#     {CYAN_UNDERLINE}2{BLUE} -> {CYAN_UNDERLINE}Get Cardano Price{BLUE}                  #");
     println!("#                                             #");
-    println!("#     {CYAN_UNDERLINE}Q{BLUE} -> {CYAN_UNDERLINE}Exit{BLUE}                               #");
+    println!("#     {CYAN_UNDERLINE}E{BLUE} -> {CYAN_UNDERLINE}Exit{BLUE}                               #");
     println!("###############################################{CLOSE}");
 }
 
@@ -205,7 +205,7 @@ pub fn start_menu_brain() {
         "#     {CYAN_UNDERLINE}4{BLUE} -> {CYAN_UNDERLINE}Show all security history{BLUE}          #"
     );
     println!("#                                             #");
-    println!("#     {CYAN_UNDERLINE}Q{BLUE} -> {CYAN_UNDERLINE}Exit{BLUE}                               #");
+    println!("#     {CYAN_UNDERLINE}E{BLUE} -> {CYAN_UNDERLINE}Exit{BLUE}                               #");
     println!("###############################################{CLOSE}");
 }
 

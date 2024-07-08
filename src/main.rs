@@ -36,5 +36,5 @@ fn main() {
 fn start_db() {
     brain::queries::q_security_create_table();
     brain::queries::q_brain_create_table();
-    brain::queries::q_security_add_timestamp();
+    brain::queries::q_security_add_security_timestamps(brain::queries::SYSTEM_LOGON);
 }

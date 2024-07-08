@@ -6,8 +6,8 @@ pub mod queries;
 /// Brain Manager
 ///
 /// Start menu layout, begin loop, ask user input or exit program
-/// Automatically create a database (if does't exist) and a timestamp is added.
 pub fn main() {
+    queries::q_security_add_security_timestamps(queries::BRAIN_LOGON);
     views::start_menu_brain();
 
     'main_loop: loop {

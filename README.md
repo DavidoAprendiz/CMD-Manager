@@ -29,8 +29,8 @@ You can find the following tools:
 - **Web Manager**
   - Download Mode - Download simple data from web to your local drive.
   - Get API Mode - Get the current price of Ergo and Cardano.
-- **Brain Manager (in-progress)**
-  - Talk with **your own** AI and save the conversation history to **your own** database.
+- **Brain Manager**
+  - Talk with **your own** AI and save the conversation history to **your own** database and/or to Markdown files.
   - Search and manage all your history.
 
 Fully functional on Linux and Windows!
@@ -61,18 +61,21 @@ Ollama
 ## Roadmap
 
 - [X] **Todo Manager**
-  - [X] Manage tasks (add/view/delete).
+  - [X] Add new tasks.
+  - [X] View your saved tasks.
+  - [X] Delete your saved tasks.
 - [X] **File Manager**
-  - [X] Search in files.
-  - [X] Compare two files.
+  - [X] Search for a "keyword" in any file.
+  - [X] Compare any two files and see all differences between them.
 - [X] **Web Manager**
-  - [X] Download files.
-  - [X] Get data from APIs.
-- [X] Improve TUI (just a little)
-- [X] Add SQLite.
+  - [X] Download any webpage from the web.
+  - [X] Get data from Coingecko APIs.
+- [X] Improve TUI (added colors)
+- [X] Add SQLite database.
 - [X] Basic unit tests (for best practices).
 - [ ] **Brain Manager (in-progress)**
-  - [ ] Brainstorm with your personal AI.
+  - [X] Brainstorm with your personal AI.
     - You can save the answers directly in a Markdown file.
   - [ ] Search in all your questions and answers.
-  - [ ] Manage your 'Brain' and 'Security'.
+  - [ ] Manage your 'Brain' history.
+  - [X] Manage your 'Security' history.

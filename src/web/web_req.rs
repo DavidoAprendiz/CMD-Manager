@@ -10,14 +10,20 @@ const CYAN_UNDERLINE_BOLD: &str = utils::CYAN_UNDERLINE_BOLD;
 ///
 /// Start menu layout, ask user input, run API (if applicable)
 pub fn main() {
-    views::start_menu_web_request();
-    println!("Enter your option: ");
-    let user_input = utils::get_user_input();
+    'main_loop: loop {
+        views::start_menu_web_request();
+        println!("Enter your option: ");
+        let user_input = utils::get_user_input();
 
-    match user_input.trim() {
-        "1" => get_price_data("ergo".to_string()),
-        "2" => get_price_data("cardano".to_string()),
-        _ => (),
+        match user_input.trim() {
+            "1" => get_price_data("ergo".to_string()),
+            "2" => get_price_data("cardano".to_string()),
+            _ => {
+                if utils::exit_program(&user_input) {
+                    break 'main_loop;
+                }
+            }
+        }
     }
 }
 

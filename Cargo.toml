@@ -1,9 +1,8 @@
 [package]
 name = "cmd-manager"
-categories = ["command-line-utilities"]
+categories = ["all-in-one-apps"]
 repository = "https://github.com/DavidoAprendiz/CMD-Manager"
-version = "0.3.0"
-readme = "README.md"
+version = "0.3.1"
 edition = "2021"
 
 [dependencies]

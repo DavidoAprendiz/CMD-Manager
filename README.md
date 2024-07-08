@@ -1,7 +1,7 @@
 <h1 align="center">CMD-Manager</h1>
 
 <p align="center">
-<img alt="CMD-Manager 0.3.0" src="https://img.shields.io/badge/cmd_manager-0.3.0-000000?style=for-the-badge&color=blue">
+<img alt="CMD-Manager 0.3.1" src="https://img.shields.io/badge/cmd_manager-0.3.1-000000?style=for-the-badge&color=blue">
 <img alt="Rust CI" src="https://github.com/DavidoAprendiz/Rust-in-Progress/actions/workflows/rust.yml/badge.svg">
 </p>
 

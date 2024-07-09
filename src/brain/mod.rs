@@ -13,16 +13,21 @@ pub fn main() {
     'main_loop: loop {
         println!("Enter your option: ");
         let user_input = utils::get_user_input();
+        utils::clear_screen();
         match user_input.trim() {
             "1" => queries::start_new_talk(),
-            // "2" => queries::q_brain_search();
-            // "3" => queries::q_brain_show_all(),
-            "4" => queries::q_security_show_all(),
+            "2" => queries::q_brain_search_talks(),
+            "3" => queries::q_brain_delete_talk(),
+            "4" => {
+                queries::q_brain_show_all();
+                println!("{}press ENTER to continue...{}", utils::BLUE, utils::CLOSE);
+                utils::get_user_input();
+            }
+            "5" => queries::q_security_show_all(),
             _ => {
                 if utils::exit_program(&user_input) {
                     break 'main_loop;
                 }
-                utils::clear_screen()
             }
         }
         views::start_menu_brain();

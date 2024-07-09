@@ -6,15 +6,32 @@ const BLUE: &str = utils::BLUE;
 const CYAN_UNDERLINE: &str = utils::CYAN_UNDERLINE;
 const CYAN_UNDERLINE_BOLD: &str = utils::CYAN_UNDERLINE_BOLD;
 
+/// Function to 'build' all menus
+pub fn start_menus(show_string: &str) {
+    let blank_spaces = 45 - show_string.len();
+    let total_blank_spaces = String::from(" ").repeat(blank_spaces / 2);
+
+    println!("{BLUE}###############################################");
+    println!("#                                             #");
+    if blank_spaces % 2 != 0 {
+        println!(
+            "#{total_blank_spaces}{CYAN_UNDERLINE_BOLD}{show_string}{BLUE}{}#",
+            total_blank_spaces.to_owned() + " "
+        );
+    } else {
+        println!(
+            "#{total_blank_spaces}{CYAN_UNDERLINE_BOLD}{show_string}{BLUE}{total_blank_spaces}#",
+        );
+    }
+    println!("#                                             #");
+    println!("###############################################{CLOSE}");
+}
+
 /// Main menu
 pub fn start_menu_main() {
     utils::clear_screen();
-    println!("{BLUE}###############################################");
-    println!("#                                             #");
-    println!("#           {CYAN_UNDERLINE_BOLD}Welcome to CMD-Manager!{BLUE}           #");
-    println!("#                                             #");
-    println!("###############################################");
-    println!("#                                             #");
+    start_menus("Welcome to CMD-Manager!");
+    println!("{BLUE}#                                             #");
     println!(
         "#     {CYAN_UNDERLINE}1{BLUE} -> {CYAN_UNDERLINE}ToDo Manager{BLUE}                       #"
     );
@@ -41,12 +58,8 @@ pub fn start_menu_main() {
 /// File menu
 pub fn start_menu_file() {
     utils::clear_screen();
-    println!("{BLUE}###############################################");
-    println!("#                                             #");
-    println!("#                {CYAN_UNDERLINE_BOLD}File Manager{BLUE}                 #");
-    println!("#                                             #");
-    println!("###############################################");
-    println!("#                                             #");
+    start_menus("File Manager");
+    println!("{BLUE}#                                             #");
     println!("#     {CYAN_UNDERLINE}1{BLUE} -> {CYAN_UNDERLINE}Search in File{BLUE}                     #");
     println!("#     {CYAN_UNDERLINE}2{BLUE} -> {CYAN_UNDERLINE}Compare two files{BLUE}                  #");
     println!("#                                             #");
@@ -57,21 +70,13 @@ pub fn start_menu_file() {
 /// File/Compare menu
 pub fn start_menu_compare() {
     utils::clear_screen();
-    println!("{BLUE}###############################################");
-    println!("#                                             #");
-    println!("#                {CYAN_UNDERLINE_BOLD}Compare Files!{BLUE}               #");
-    println!("#                                             #");
-    println!("###############################################{CLOSE}");
+    start_menus("Compare Files!");
 }
 
 /// File/Search menu
 pub fn start_menu_search() {
     utils::clear_screen();
-    println!("{BLUE}###############################################");
-    println!("#                                             #");
-    println!("#               {CYAN_UNDERLINE_BOLD}Search in File!{BLUE}               #");
-    println!("#                                             #");
-    println!("###############################################{CLOSE}");
+    start_menus("Search in File!");
 }
 
 //
@@ -81,12 +86,8 @@ pub fn start_menu_search() {
 /// Todo menu
 pub fn start_menu_todo() {
     utils::clear_screen();
-    println!("{BLUE}###############################################");
-    println!("#                                             #");
-    println!("#                {CYAN_UNDERLINE_BOLD}To-do Manager{BLUE}                #");
-    println!("#                                             #");
-    println!("###############################################");
-    println!("#                                             #");
+    start_menus("To-do Manager");
+    println!("{BLUE}#                                             #");
     println!("#     {CYAN_UNDERLINE}1{BLUE} -> {CYAN_UNDERLINE}New Task{BLUE}                           #");
     println!("#     {CYAN_UNDERLINE}2{BLUE} -> {CYAN_UNDERLINE}Remove Task{BLUE}                        #");
     println!("#     {CYAN_UNDERLINE}3{BLUE} -> {CYAN_UNDERLINE}View Task{BLUE}                          #");
@@ -99,40 +100,30 @@ pub fn start_menu_todo() {
 /// Todo New Task
 pub fn start_menu_todo_new() {
     utils::clear_screen();
-    println!("{BLUE}###############################################");
-    println!("#              {CYAN_UNDERLINE_BOLD}Create a new task!{BLUE}             #");
-    println!("###############################################{CLOSE}\n");
+    start_menus("Create a new task!");
 }
 
 /// Todo Task Saved
 pub fn start_menu_todo_saved() {
-    println!("{BLUE}###############################################");
-    println!("#                 {CYAN_UNDERLINE_BOLD}Task saved!{BLUE}                 #");
-    println!("###############################################{CLOSE}\n");
+    start_menus("Task saved!");
 }
 
 /// Todo All Saved Tasks
 pub fn start_menu_todo_all() {
     utils::clear_screen();
-    println!("{BLUE}###############################################");
-    println!("#                  {CYAN_UNDERLINE_BOLD}All Tasks!{BLUE}                 #");
-    println!("###############################################{CLOSE}\n");
+    start_menus("Show All Tasks!");
 }
 
 /// Todo View Task
 pub fn start_menu_todo_view() {
     utils::clear_screen();
-    println!("{BLUE}###############################################");
-    println!("#              {CYAN_UNDERLINE_BOLD}View your tasks!{BLUE}               #");
-    println!("###############################################{CLOSE}\n");
+    start_menus("View your tasks!");
 }
 
 /// Todo Remove Task
 pub fn start_menu_todo_remove() {
     utils::clear_screen();
-    println!("{BLUE}###############################################");
-    println!("#                {CYAN_UNDERLINE_BOLD}Remove a task!{BLUE}               #");
-    println!("###############################################{CLOSE}\n");
+    start_menus("Remove a task!");
 }
 
 //
@@ -142,12 +133,8 @@ pub fn start_menu_todo_remove() {
 /// Web menu
 pub fn start_menu_web() {
     utils::clear_screen();
-    println!("{BLUE}###############################################");
-    println!("#                                             #");
-    println!("#                 {CYAN_UNDERLINE_BOLD}Web Manager{BLUE}                 #");
-    println!("#                                             #");
-    println!("###############################################");
-    println!("#                                             #");
+    start_menus("Web Manager");
+    println!("{BLUE}#                                             #");
     println!("#     {CYAN_UNDERLINE}1{BLUE} -> {CYAN_UNDERLINE}Download files{BLUE}                     #");
     println!("#     {CYAN_UNDERLINE}2{BLUE} -> {CYAN_UNDERLINE}Get price data{BLUE}                     #");
     println!("#                                             #");
@@ -155,25 +142,11 @@ pub fn start_menu_web() {
     println!("###############################################{CLOSE}");
 }
 
-/// Web/Downloads menu
-pub fn start_menu_download() {
-    utils::clear_screen();
-    println!("{BLUE}###############################################");
-    println!("#                                             #");
-    println!("#                {CYAN_UNDERLINE_BOLD}Download data!{BLUE}               #");
-    println!("#                                             #");
-    println!("###############################################{CLOSE}\n");
-}
-
 // Web/WebRequests menu
 pub fn start_menu_web_request() {
     utils::clear_screen();
-    println!("{BLUE}###############################################");
-    println!("#                                             #");
-    println!("#                 {CYAN_UNDERLINE_BOLD}Price data!{BLUE}                 #");
-    println!("#                                             #");
-    println!("###############################################");
-    println!("#                                             #");
+    start_menus("Price data!");
+    println!("{BLUE}#                                             #");
     println!("#     {CYAN_UNDERLINE}1{BLUE} -> {CYAN_UNDERLINE}Get Ergo Price{BLUE}                     #");
     println!("#     {CYAN_UNDERLINE}2{BLUE} -> {CYAN_UNDERLINE}Get Cardano Price{BLUE}                  #");
     println!("#                                             #");
@@ -188,34 +161,24 @@ pub fn start_menu_web_request() {
 // Brain menu
 pub fn start_menu_brain() {
     utils::clear_screen();
-    println!("{BLUE}###############################################");
-    println!("#                                             #");
-    println!("#                 {CYAN_UNDERLINE_BOLD}Brain Manager!{BLUE}              #");
-    println!("#                                             #");
-    println!("###############################################");
-    println!("#                                             #");
-    println!("#     {CYAN_UNDERLINE}1{BLUE} -> {CYAN_UNDERLINE}Ask questions{BLUE}                      #");
+    start_menus("Brain Manager!");
+    println!("{BLUE}#                                             #");
     println!(
-        "#     {CYAN_UNDERLINE}2{BLUE} -> {CYAN_UNDERLINE}Search Q&A in DB{BLUE}                   #"
+        "#     {CYAN_UNDERLINE}1{BLUE} -> {CYAN_UNDERLINE}Start a new conversation{BLUE}           #"
     );
     println!(
-        "#     {CYAN_UNDERLINE}3{BLUE} -> {CYAN_UNDERLINE}Show all talks history{BLUE}             #"
+        "#     {CYAN_UNDERLINE}2{BLUE} -> {CYAN_UNDERLINE}Search 'keywords' in the DB{BLUE}        #"
     );
     println!(
-        "#     {CYAN_UNDERLINE}4{BLUE} -> {CYAN_UNDERLINE}Show all security history{BLUE}          #"
+        "#     {CYAN_UNDERLINE}3{BLUE} -> {CYAN_UNDERLINE}Delete conversations{BLUE}               #"
+    );
+    println!(
+        "#     {CYAN_UNDERLINE}4{BLUE} -> {CYAN_UNDERLINE}Show all conversation history{BLUE}      #"
+    );
+    println!(
+        "#     {CYAN_UNDERLINE}5{BLUE} -> {CYAN_UNDERLINE}Show all security history{BLUE}          #"
     );
     println!("#                                             #");
     println!("#     {CYAN_UNDERLINE}E{BLUE} -> {CYAN_UNDERLINE}Exit{BLUE}                               #");
     println!("###############################################{CLOSE}");
-}
-
-// Brain/New menu
-pub fn start_menu_brain_new_talk() {
-    utils::clear_screen();
-    println!("{BLUE}###############################################");
-    println!("#                                             #");
-    println!("#               {CYAN_UNDERLINE_BOLD}Let's brainstorm!{BLUE}             #");
-    println!("#                                             #");
-    println!("###############################################");
-    println!("{CYAN_UNDERLINE}What's your question?{CLOSE}");
 }

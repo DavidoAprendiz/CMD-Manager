@@ -13,7 +13,7 @@ const ERRO: &str = utils::ERRO;
 /// Check folder Downloads (if !exists and OS), get user input and write directly to file
 pub fn main() {
     utils::create_folder(downloads_folder());
-    views::start_menu_download();
+    views::start_menus("Download data!");
     println!("{CYAN_UNDERLINE}Enter the url to download:{CLOSE}");
     let user_input = utils::get_user_input();
     let url_response = get_response(user_input);

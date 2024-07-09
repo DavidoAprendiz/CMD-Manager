@@ -11,6 +11,7 @@ pub fn main() {
     'main_loop: loop {
         println!("Enter your option: ");
         let user_input = utils::get_user_input();
+        utils::clear_screen();
         match user_input.trim() {
             "1" => download::main(),
             "2" => web_req::main(),
@@ -18,7 +19,6 @@ pub fn main() {
                 if utils::exit_program(&user_input) {
                     break 'main_loop;
                 }
-                utils::clear_screen()
             }
         }
         views::start_menu_web();

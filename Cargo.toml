@@ -2,7 +2,7 @@
 name = "cmd-manager"
 categories = ["all-in-one-apps"]
 repository = "https://github.com/DavidoAprendiz/CMD-Manager"
-version = "0.3.1"
+version = "0.3.2"
 edition = "2021"
 
 [dependencies]

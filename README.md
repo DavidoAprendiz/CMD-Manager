@@ -2,9 +2,9 @@
 
 <div align="center">
 <img alt="Rust CI" src="https://github.com/DavidoAprendiz/Rust-in-Progress/actions/workflows/rust.yml/badge.svg">
-
+<br>
 <img alt="CMD-Manager 0.3.2" src="https://img.shields.io/badge/cmd_manager-0.3.2-000000?style=for-the-badge&color=blue">
-
+<br>
 <img alt="Made with Rust and SQLite" src="https://skillicons.dev/icons?i=rust,sqlite">
 <img alt="ollama" height="50px" src="https://github.com/ollama/ollama/assets/3325447/0d0b44e2-8f4a-4e99-9b52-a5c1c741c8f7">
 
@@ -15,14 +15,16 @@
   <a href="#pre-requirements">Pre-requirements</a> •
   <a href="#install">Install</a> •
   <a href="#clone">Clone</a> •
-  <a href="#roadmap">Roadmap</a> •
-  <a href="#contribution">Contribution</a> •
+  <a href="#contributing">Contributing</a> •
   <a href="#license">License</a> •
 </div>
 
 ---
 
-<img alt="CMD-Manager" src="https://github.com/DavidoAprendiz/CMD-Manager/assets/21132833/07356fdb-9ce9-4905-b02a-f7db84287af6">
+![cmd](https://github.com/DavidoAprendiz/CMD-Manager/assets/21132833/fb8dcfe3-9e21-49c1-aab9-b73984f29e54)
+
+![db1](https://github.com/DavidoAprendiz/CMD-Manager/assets/21132833/1a56cc59-6afc-4e7f-aa46-781d659548ed)
+
 </div>
 
 ## ⚡Description
@@ -57,7 +59,7 @@ Here, you'll find the following tools:
 - All your actions are audited and sent to the 'Security' database
 - All your conversation are saved in the folder '/Project/Database'
 
-## 🚀How to use
+## 🚀 How to use
 
 ### Pre-requirements
 

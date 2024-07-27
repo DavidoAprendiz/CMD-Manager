@@ -23,7 +23,6 @@ fn main() {
                 if utils::exit_program(&user_input) {
                     break 'main_loop;
                 }
-                utils::clear_screen()
             }
         }
         views::start_menu_main();
@@ -35,6 +34,9 @@ fn main() {
 /// Add timestamp to TB_SECURITY
 fn start_db() {
     brain::queries::q_security_create_table();
+    brain::queries::q_todo_create_table();
+    // TODO brain::queries::q_file_create_table();
+    // TODO brain::queries::q_web_create_table();
     brain::queries::q_brain_create_table();
     brain::queries::q_security_add_security_timestamps(brain::queries::SYSTEM_LOGON);
 }

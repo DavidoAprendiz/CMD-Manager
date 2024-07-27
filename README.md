@@ -3,7 +3,7 @@
 <div align="center">
 <img alt="Rust CI" src="https://github.com/DavidoAprendiz/Rust-in-Progress/actions/workflows/rust.yml/badge.svg">
 <br>
-<img alt="CMD-Manager 0.3.2" src="https://img.shields.io/badge/cmd_manager-0.3.2-000000?style=for-the-badge&color=blue">
+<img alt="CMD-Manager 0.3.3" src="https://img.shields.io/badge/cmd_manager-0.3.3-000000?style=for-the-badge&color=blue">
 <br>
 <img alt="Made with Rust and SQLite" src="https://skillicons.dev/icons?i=rust,sqlite">
 <img alt="ollama" height="50px" src="https://github.com/ollama/ollama/assets/3325447/0d0b44e2-8f4a-4e99-9b52-a5c1c741c8f7">
@@ -23,22 +23,20 @@
 
 ![cmd](https://github.com/DavidoAprendiz/CMD-Manager/assets/21132833/fb8dcfe3-9e21-49c1-aab9-b73984f29e54)
 
-![db1](https://github.com/DavidoAprendiz/CMD-Manager/assets/21132833/1a56cc59-6afc-4e7f-aa46-781d659548ed)
+![db](https://github.com/user-attachments/assets/e34ee34b-3cc1-41d3-83aa-ee33c6ce75fe)
 
 </div>
 
 ## ⚡Description
 
-A **multi-applications** command-line power-by AI and is focused on privacy (because privacy matters!)
+A **multi-application** command-line powered by AI, focused on privacy (because privacy matters!).
 
-From the simple to-do/note taking app to your own personal assistant database (with security logs!)
-
-Here, you'll find the following tools:
+From the simple to-do/note taking app to your own personal assistant, all within the comfort of your database!
 
 ### **To-do Manager**
 
 - You can add, view and delete your to-dos/notes in an offline environment.
-- All your to-dos/notes are saved in the folder '/Project/Todo'
+- All your to-dos/notes are saved in the database!
 
 ### **File Manager**
 
@@ -61,35 +59,45 @@ Here, you'll find the following tools:
 
 ## 🚀 How to use
 
-### Pre-requirements
+### Download the latest version
+
+> #### Standalone
+
+- [Releases](https://github.com/DavidoAprendiz/CMD-Manager/releases)
+
+---
+
+### Or if you want to change/edit the application
+
+> #### Install pre-requirements
 
 Rust
 
-- To run the program (without Brain module):
-  - Install the latest [Rust](https://www.rust-lang.org/learn/get-started)
+- Install the latest [Rust](https://www.rust-lang.org/learn/get-started)
 
 Ollama
 
-- To run Brain module:
-  - Install Llama3 in [Ollama](https://ollama.com/)
+- Install Llama3 in [Ollama](https://ollama.com/)
+  (needed for "Brain module")
 
-### Install
-
-- You can simple run the latest standalone version:
-  - [Releases](https://github.com/DavidoAprendiz/CMD-Manager/releases)
-
-### Clone
+> #### Clone (or Fork directly)
 
 - Open a terminal and clone the repository:
   - `git clone https://github.com/DavidoAprendiz/CMD-Manager.git`
-- Enter the directory and run Cargo:
+- Enter the directory:
+  - `cd CMD-Manager`
+- Run Cargo:
   - `cargo run`
 
-### Manage Database via Graphical Interface (GUI)
+---
 
-- To view all your database information:
-  - Download and install [SQLite Browser](https://sqlitebrowser.org/)
-  - Open database: '/Project/Database/database.db'
+### Manage the database via Graphical Interface (GUI)
+
+> #### To view all your database information
+
+- Download and install [SQLite Browser](https://sqlitebrowser.org/)
+- Open database in the default path:
+  - `/Project/database.db`
 
 ## ☑️Roadmap
 
@@ -114,6 +122,17 @@ Ollama
   - [X] Manage 'Brain' history database.
   - [X] View 'Security' history database.
   - [X] Security Audit. Everything is logged in Security database.
+
+  **(in-progress)**
+
+- [ ] Database integration with all missing modules:
+  - [X] Todo manager
+  - [ ] File manager
+  - [ ] Web manager
+- [ ] Database security:
+  - [ ] Add password protection.
+  - [ ] Evaluate gpg symmetric encryption...
+- [ ] Verify (and implement) new llama 3.1 version.
 
 ## 💻Contributing
 

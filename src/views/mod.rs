@@ -6,7 +6,7 @@ const BLUE: &str = utils::BLUE;
 const CYAN_UNDERLINE: &str = utils::CYAN_UNDERLINE;
 const CYAN_UNDERLINE_BOLD: &str = utils::CYAN_UNDERLINE_BOLD;
 
-/// Function to 'build' all menus
+/// Function to build 'simple' menus
 pub fn start_menus(show_string: &str) {
     let blank_spaces = 45 - show_string.len();
     let total_blank_spaces = String::from(" ").repeat(blank_spaces / 2);
@@ -79,51 +79,20 @@ pub fn start_menu_search() {
     start_menus("Search in File!");
 }
 
-//
-//  .TODO MANAGER
-//
-
-/// Todo menu
+///
+///  .TODO MANAGER MENU
+///
 pub fn start_menu_todo() {
     utils::clear_screen();
     start_menus("To-do Manager");
     println!("{BLUE}#                                             #");
     println!("#     {CYAN_UNDERLINE}1{BLUE} -> {CYAN_UNDERLINE}New Task{BLUE}                           #");
     println!("#     {CYAN_UNDERLINE}2{BLUE} -> {CYAN_UNDERLINE}Remove Task{BLUE}                        #");
-    println!("#     {CYAN_UNDERLINE}3{BLUE} -> {CYAN_UNDERLINE}View Task{BLUE}                          #");
+    println!("#     {CYAN_UNDERLINE}3{BLUE} -> {CYAN_UNDERLINE}Search Task{BLUE}                        #");
     println!("#     {CYAN_UNDERLINE}4{BLUE} -> {CYAN_UNDERLINE}Show All Tasks{BLUE}                     #");
     println!("#                                             #");
     println!("#     {CYAN_UNDERLINE}E{BLUE} -> {CYAN_UNDERLINE}Exit{BLUE}                               #");
     println!("###############################################{CLOSE}\n");
-}
-
-/// Todo New Task
-pub fn start_menu_todo_new() {
-    utils::clear_screen();
-    start_menus("Create a new task!");
-}
-
-/// Todo Task Saved
-pub fn start_menu_todo_saved() {
-    start_menus("Task saved!");
-}
-
-/// Todo All Saved Tasks
-pub fn start_menu_todo_all() {
-    utils::clear_screen();
-    start_menus("Show All Tasks!");
-}
-
-/// Todo View Task
-pub fn start_menu_todo_view() {
-    utils::clear_screen();
-    start_menus("View your tasks!");
-}
-
-/// Todo Remove Task
-pub fn start_menu_todo_remove() {
-    utils::clear_screen();
-    start_menus("Remove a task!");
 }
 
 //

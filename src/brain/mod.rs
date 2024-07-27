@@ -39,9 +39,9 @@ pub fn main() {
 pub fn db_folder() -> String {
     let operating_system = env::consts::OS;
     if operating_system.contains("windows") {
-        "\\Project\\Database\\".to_string()
+        "\\Project\\".to_string()
     } else {
-        "/Project/Database/".to_string()
+        "/Project/".to_string()
     }
 }
 
@@ -54,9 +54,9 @@ mod tests {
         assert_eq!(
             db_folder(),
             if env::consts::OS.contains("windows") {
-                "\\Project\\Database\\".to_string()
+                "\\Project\\".to_string()
             } else {
-                "/Project/Database/".to_string()
+                "/Project/".to_string()
             }
         );
     }

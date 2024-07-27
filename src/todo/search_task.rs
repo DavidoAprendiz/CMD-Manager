@@ -1,10 +1,10 @@
-use crate::{brain::queries, utils, views};
+use crate::utils;
 
-/// Get all tasks in folder 'src\Tasks'
-pub fn show_task() {
+pub fn search_task() {
     utils::clear_screen();
-    views::start_menus("Show all tasks!");
-    queries::q_todo_show_all();
+
+    println!("\n... under-construction ...");
+
     println!(
         "\n{}###############################################\nPress ENTER to continue...{}",
         utils::BLUE,

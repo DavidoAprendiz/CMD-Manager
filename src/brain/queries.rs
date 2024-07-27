@@ -14,21 +14,32 @@ const ERRO: &str = utils::ERRO;
 //
 // Constants
 //
+
 // Database file name
 const DATABASE: &str = "database.db";
+
 // Tables
-const TB_SECURITY: &str = "SECURITY_HIST";
-const TB_BRAIN: &str = "BRAIN_HIST";
+const TB_SECURITY: &str = "SECURITY";
+const TB_BRAIN: &str = "BRAIN";
+const TB_TODO: &str = "TODO";
+
 // Shared columns
 const CL_ID: &str = "rowid";
 const CL_TIMESTAMP: &str = "timestamp";
+
 // DB SECURITY_HIST columns
 const CL_REASON: &str = "reasons";
+
+// DB TODO_HIST columns
+const CL_TODO_TITLE: &str = "title";
+const CL_TODO_TASK: &str = "task";
+
 // DB BRAIN_HIST columns
 const CL_QUESTIONS: &str = "questions";
 const CL_ANSWERS: &str = "answers";
+
 // SECURITY_HIST reasons
-pub const SYSTEM_LOGON: &str = "system_logon";
+pub const SYSTEM_LOGON: &str = "system_startup";
 pub const TODO_LOGON: &str = "todo_logon";
 pub const FILE_LOGON: &str = "file_logon";
 pub const WEB_LOGON: &str = "web_logon";
@@ -40,6 +51,9 @@ const SEARCH_TALK: &str = "conversation_searched";
 const VIEW_TALK: &str = "conversations_log_opened";
 const VIEW_SECURITY: &str = "security_log_opened";
 const SAVE_MD: &str = "markdown_saved";
+const VIEW_TODO: &str = "todo_log_opened";
+const ADD_TASK: &str = "task_added";
+const REMOVE_TASK: &str = "task_removed";
 
 ///
 /// START TALK
@@ -110,7 +124,7 @@ fn talk_save_to_md(user_input: String, comm: String) {
         user_input, comm,
     )) {
         Ok(_) => println!("\n{CYAN_UNDERLINE}File saved successfully.{CLOSE}"),
-        Err(e) => println!("{ERRO}Failed to save task in file!\n{e}{ERRO}"),
+        Err(e) => println!("{ERRO}Failed to save talk in file!\n{e}{ERRO}"),
     }
 }
 
@@ -158,7 +172,7 @@ pub fn q_security_show_all() {
     let mut statement = conn.prepare(query).unwrap();
     statement.iter();
 
-    println!("\n{CYAN_UNDERLINE}Table{CLOSE} : {TB_SECURITY}\n    {CYAN_UNDERLINE}Columns{CLOSE} : {CL_ID} | {CL_TIMESTAMP} | {CL_REASON}\n");
+    println!("\n{CYAN_UNDERLINE}Table{CLOSE}   : {TB_SECURITY}\n{CYAN_UNDERLINE}Columns{CLOSE} : {CL_ID} | {CL_TIMESTAMP} | {CL_REASON}\n");
     while let Ok(State::Row) = statement.next() {
         println!(
             "\n> {} | {} | {}",
@@ -169,6 +183,90 @@ pub fn q_security_show_all() {
     }
     println!("\n{BLUE}###############################################\nPress ENTER to continue...{CLOSE}");
     utils::get_user_input();
+}
+
+///
+/// .TODO MANAGER
+///
+
+/// Create 'TB_TODO' table
+pub fn q_todo_create_table() {
+    utils::create_folder(db_folder());
+    let path = utils::get_file_path(format!("{}{}", db_folder(), DATABASE));
+    let conn = sqlite::open(path).unwrap();
+
+    let query = format!(
+        "CREATE TABLE IF NOT EXISTS {TB_TODO} ({CL_TIMESTAMP} TEXT, {CL_TODO_TITLE} TEXT, {CL_TODO_TASK} BLOB);"
+    );
+
+    conn.execute(query)
+        .expect("\x1b[0m\x1b[31;3mFailed to execute query! 'q_todo_create_table()'\x1b[0m");
+}
+
+/// Insert user data (Title and Task) to 'TB_TODO' table
+pub fn q_todo_add_task(task_name: String, task: String) {
+    q_security_add_security_timestamps(ADD_TASK);
+    let path = utils::get_file_path(format!("{}{}", db_folder(), DATABASE));
+    let conn = sqlite::open(path).unwrap();
+
+    let query = format!(
+        "
+    INSERT INTO {TB_TODO} ({CL_TIMESTAMP}, {CL_TODO_TITLE}, {CL_TODO_TASK}) 
+    VALUES (datetime(CURRENT_TIMESTAMP,'localtime'), '{:?}', '{:?}' );",
+        r#task_name, r#task
+    );
+
+    conn.execute(query)
+        .expect("\x1b[0m\x1b[31;3mFailed to execute query! 'q_todo_add_task()'\x1b[0m");
+}
+
+/// Delete Todo Tasks
+pub fn q_todo_delete_task() {
+    q_security_add_security_timestamps(REMOVE_TASK);
+    let path = utils::get_file_path(format!("{}{}", db_folder(), DATABASE));
+    let conn = sqlite::open(path).unwrap();
+
+    println!("\n{CYAN_UNDERLINE}Please insert 'ID' to delete:\n{BLUE}(or press ENTER to continue){CLOSE}");
+    let task_id = utils::get_user_input();
+
+    if !task_id.trim().is_empty() && task_id.chars().next().unwrap().is_ascii_digit() {
+        let query = format!(
+            "
+                DELETE FROM {TB_TODO} where {CL_ID} = {:?}; VACUUM;
+                ",
+            task_id.trim().parse::<i32>().unwrap()
+        );
+        match conn.execute(query) {
+            Ok(_) => {
+                println!("{CYAN_UNDERLINE}Task id '{task_id}' was successfully deleted.{CLOSE}")
+            }
+            Err(_) => println!("{ERRO}Failed to execute query! 'q_todo_delete_task()'{CLOSE}"),
+        }
+        println!("\n{BLUE}###############################################\nPress ENTER to continue...{CLOSE}");
+        utils::get_user_input();
+    }
+}
+
+/// Show all data from 'TB_TODO' table
+pub fn q_todo_show_all() {
+    q_security_add_security_timestamps(VIEW_TODO);
+    let path = utils::get_file_path(format!("{}{}", db_folder(), DATABASE));
+    let conn = sqlite::open(path).unwrap();
+    let query =
+        format!("SELECT {CL_ID}, {CL_TIMESTAMP}, {CL_TODO_TITLE}, {CL_TODO_TASK}  FROM {TB_TODO};");
+    let mut statement = conn.prepare(query).unwrap();
+    statement.iter();
+
+    println!("\n{CYAN_UNDERLINE}Table{CLOSE}   : {TB_TODO}\n{CYAN_UNDERLINE}Columns{CLOSE} : {CL_ID} | {CL_TIMESTAMP} | {CL_TODO_TITLE} | {CL_TODO_TASK}\n");
+    while let Ok(State::Row) = statement.next() {
+        println!(
+            "\n> {} | {} | {} | {}",
+            statement.read::<String, _>(CL_ID).unwrap(),
+            statement.read::<String, _>(CL_TIMESTAMP).unwrap(),
+            statement.read::<String, _>(CL_TODO_TITLE).unwrap(),
+            statement.read::<String, _>(CL_TODO_TASK).unwrap(),
+        );
+    }
 }
 
 ///
@@ -227,7 +325,7 @@ pub fn q_brain_search_talks() {
 
     println!("\n{BLUE}###############################################{CLOSE}\n");
     println!(
-        "\n{CYAN_UNDERLINE}Table{CLOSE} : {TB_BRAIN}\n    {CYAN_UNDERLINE}Columns{CLOSE} : {CL_ID} | {CL_TIMESTAMP} | {CL_QUESTIONS} | {CL_ANSWERS}\n\n"
+        "\n{CYAN_UNDERLINE}Table{CLOSE}   : {TB_BRAIN}\n{CYAN_UNDERLINE}Columns{CLOSE} : {CL_ID} | {CL_TIMESTAMP} | {CL_QUESTIONS} | {CL_ANSWERS}\n\n"
     );
     while let Ok(State::Row) = statement.next() {
         println!(
@@ -254,20 +352,20 @@ pub fn q_brain_delete_talk() {
 
     q_brain_show_all();
     println!("\n{CYAN_UNDERLINE}Please insert 'ID':\n{BLUE}(or press ENTER to continue){CLOSE}");
-    let task_id = utils::get_user_input();
+    let talk_id = utils::get_user_input();
 
-    if !task_id.trim().is_empty() && task_id.chars().next().unwrap().is_ascii_digit() {
+    if !talk_id.trim().is_empty() && talk_id.chars().next().unwrap().is_ascii_digit() {
         let query = format!(
             "
                 DELETE FROM {TB_BRAIN} where {CL_ID} = {:?}; VACUUM;
                 ",
-            task_id.trim().parse::<i32>().unwrap()
+            talk_id.trim().parse::<i32>().unwrap()
         );
         match conn.execute(query) {
             Ok(_) => {
-                println!("{CYAN_UNDERLINE}Task id '{task_id}' was successfully deleted{CLOSE}")
+                println!("{CYAN_UNDERLINE}Talk id '{talk_id}' was successfully deleted{CLOSE}")
             }
-            Err(_) => println!("{ERRO}TFailed to execute query! 'q_brain_add_talk()'{CLOSE}"),
+            Err(_) => println!("{ERRO}Failed to execute query! 'q_brain_add_talk()'{CLOSE}"),
         }
     }
 }
@@ -285,7 +383,7 @@ pub fn q_brain_show_all() {
     statement.iter();
 
     println!(
-        "\n{CYAN_UNDERLINE}Table{CLOSE} : {TB_BRAIN}\n    {CYAN_UNDERLINE}Columns{CLOSE} : {CL_ID} | {CL_TIMESTAMP} | {CL_QUESTIONS} | {CL_ANSWERS}\n"
+        "\n{CYAN_UNDERLINE}Table{CLOSE}   : {TB_BRAIN}\n{CYAN_UNDERLINE}Columns{CLOSE} : {CL_ID} | {CL_TIMESTAMP} | {CL_QUESTIONS} | {CL_ANSWERS}\n"
     );
     while let Ok(State::Row) = statement.next() {
         println!(

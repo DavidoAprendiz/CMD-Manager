@@ -23,7 +23,7 @@
 
 ![cmd](https://github.com/DavidoAprendiz/CMD-Manager/assets/21132833/fb8dcfe3-9e21-49c1-aab9-b73984f29e54)
 
-![db1](https://github.com/DavidoAprendiz/CMD-Manager/assets/21132833/1a56cc59-6afc-4e7f-aa46-781d659548ed)
+![db](https://github.com/user-attachments/assets/e34ee34b-3cc1-41d3-83aa-ee33c6ce75fe)
 
 </div>
 

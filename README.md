@@ -3,7 +3,7 @@
 <div align="center">
 <img alt="Rust CI" src="https://github.com/DavidoAprendiz/Rust-in-Progress/actions/workflows/rust.yml/badge.svg">
 <br>
-<img alt="CMD-Manager 0.3.3" src="https://img.shields.io/badge/cmd_manager-0.3.3-000000?style=for-the-badge&color=blue">
+<img alt="CMD-Manager 0.4.0" src="https://img.shields.io/badge/cmd_manager-0.3.3-000000?style=for-the-badge&color=blue">
 <br>
 <img alt="Made with Rust and SQLite" src="https://skillicons.dev/icons?i=rust,sqlite">
 <img alt="ollama" height="50px" src="https://github.com/ollama/ollama/assets/3325447/0d0b44e2-8f4a-4e99-9b52-a5c1c741c8f7">
@@ -11,12 +11,13 @@
 <a>Made with Rust, SQLite and Ollama</a>
 
 <div align="center">
-• <a href="#description">Description</a> •
-  <a href="#pre-requirements">Pre-requirements</a> •
-  <a href="#install">Install</a> •
-  <a href="#clone">Clone</a> •
-  <a href="#contributing">Contributing</a> •
-  <a href="#license">License</a> •
+• <a href="#-description">⚡ Description</a> •
+  <a href="#-how-to-use">🚀 How to use</a> •
+  <a href="#-or-if-you-want-to-changeedit-the-application">📥 Install</a> •
+  <a href="#-manage-the-database-via-graphical-interface-gui">⛁ Manage Database</a> •
+  <a href="#CONTRIBUTING.md">💻 Contributing</a> •
+  <a href="#LICENSE">📃 License</a> •
+  <a href="#LICENSE">✅ Roadmap</a> •
 </div>
 
 ---
@@ -67,7 +68,7 @@ From the simple to-do/note taking app to your own personal assistant, all within
 
 ---
 
-### Or if you want to change/edit the application
+### 📥 Or if you want to change/edit the application
 
 > #### Install pre-requirements
 
@@ -91,7 +92,7 @@ Ollama
 
 ---
 
-### Manage the database via Graphical Interface (GUI)
+### ⛁ Manage the database via Graphical Interface (GUI)
 
 > #### To view all your database information
 
@@ -99,7 +100,7 @@ Ollama
 - Open database in the default path:
   - `/Project/database.db`
 
-## ☑️Roadmap
+## ✅Roadmap
 
 - [X] **Todo Manager**
   - [X] Add new tasks.
@@ -130,14 +131,7 @@ Ollama
   - [ ] File manager
   - [ ] Web manager
 - [ ] Database security:
+  - [X] Add Security Manager
   - [ ] Add password protection.
   - [ ] Evaluate gpg symmetric encryption...
 - [ ] Verify (and implement) new llama 3.1 version.
-
-## 💻Contributing
-
-Contributions of all types are more than welcome so please feel free!
-
-## 📃License
-
-- [MIT](https://github.com/DavidoAprendiz/CMD-Manager/LICENSE)

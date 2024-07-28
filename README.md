@@ -3,7 +3,7 @@
 <div align="center">
 <img alt="Rust CI" src="https://github.com/DavidoAprendiz/Rust-in-Progress/actions/workflows/rust.yml/badge.svg">
 <br>
-<img alt="CMD-Manager 0.4.0" src="https://img.shields.io/badge/cmd_manager-0.3.3-000000?style=for-the-badge&color=blue">
+<img alt="CMD-Manager" src="https://img.shields.io/badge/cmd_manager-0.4.0-000000?style=for-the-badge&color=blue">
 <br>
 <img alt="Made with Rust and SQLite" src="https://skillicons.dev/icons?i=rust,sqlite">
 <img alt="ollama" height="50px" src="https://github.com/ollama/ollama/assets/3325447/0d0b44e2-8f4a-4e99-9b52-a5c1c741c8f7">

@@ -1,39 +1,32 @@
-use crate::{utils, views};
+use crate::{utils::*, views};
 use std::fs;
-
-// Define constants for colors (change colors in utils.rs)
-const CLOSE: &str = utils::CLOSE;
-const BLUE: &str = utils::BLUE;
-const CYAN_UNDERLINE: &str = utils::CYAN_UNDERLINE;
-const CYAN_UNDERLINE_BOLD: &str = utils::CYAN_UNDERLINE_BOLD;
-const ERRO: &str = utils::ERRO;
 
 /// Search
 ///
 /// Start menu layout, start function 'get_pattern()'. The output is sent to 'get_file() and then 'results()'
 pub fn main() {
-    views::start_menu_search();
+    views::start_menus("Search in File!");
     get_pattern();
 }
 
 /// Get word pattern from user
 fn get_pattern() {
     println!("\n{CYAN_UNDERLINE}Available files:{CLOSE}\n");
-    utils::get_files_from_folder("".to_string());
+    get_files_from_folder("".to_string());
     println!("\n{CYAN_UNDERLINE}Please insert the pattern you want to search:{CLOSE}");
-    get_file(utils::get_user_input())
+    get_file(get_user_input())
 }
 
 /// Get file name from user
 fn get_file(user_pattern: String) {
     println!("\n{CYAN_UNDERLINE}Please insert the file name: {CYAN_UNDERLINE_BOLD}(without quotes){CLOSE}");
-    let user_input = utils::get_user_input();
+    let user_input = get_user_input();
     get_results(user_pattern, user_input)
 }
 
 /// Show results from the chosen pattern and file.
 fn get_results(user_pattern: String, user_file: String) {
-    let path = utils::get_file_path(user_file);
+    let path = get_file_path(user_file);
 
     println!("\n{BLUE}###############################################{CLOSE}");
     println!(
@@ -58,6 +51,6 @@ fn get_results(user_pattern: String, user_file: String) {
         Err(e) => println!("{ERRO}Failed to open file.\n{e}{CLOSE}"),
     }
     println!("{BLUE}Press ENTER to continue...{CLOSE}");
-    utils::get_user_input();
-    utils::clear_screen()
+    get_user_input();
+    clear_screen()
 }

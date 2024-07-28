@@ -1,5 +1,7 @@
 mod brain; // Brain Manager
 mod file; // File Manager
+mod queries; // All Queries to DB
+mod security; // Security Manager
 mod todo; // Todo Manager
 mod utils; // Common functions
 mod views; // Application views
@@ -19,6 +21,7 @@ fn main() {
             "2" => file::main(),
             "3" => web::main(),
             "4" => brain::main(),
+            "5" => security::main(),
             _ => {
                 if utils::exit_program(&user_input) {
                     break 'main_loop;
@@ -33,10 +36,10 @@ fn main() {
 ///
 /// Add timestamp to TB_SECURITY
 fn start_db() {
-    brain::queries::q_security_create_table();
-    brain::queries::q_todo_create_table();
-    // TODO brain::queries::q_file_create_table();
-    // TODO brain::queries::q_web_create_table();
-    brain::queries::q_brain_create_table();
-    brain::queries::q_security_add_security_timestamps(brain::queries::SYSTEM_LOGON);
+    queries::security::q_security_create_table();
+    queries::todo::q_todo_create_table();
+    // TODO queries::file::q_file_create_table();
+    // TODO queries::web::q_web_create_table();
+    queries::brain::q_brain_create_table();
+    queries::security::q_security_add_security_timestamps(queries::SYSTEM_LOGON);
 }

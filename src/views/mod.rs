@@ -8,6 +8,7 @@ const CYAN_UNDERLINE_BOLD: &str = utils::CYAN_UNDERLINE_BOLD;
 
 /// Function to build 'simple' menus
 pub fn start_menus(show_string: &str) {
+    utils::clear_screen();
     let blank_spaces = 45 - show_string.len();
     let total_blank_spaces = String::from(" ").repeat(blank_spaces / 2);
 
@@ -29,7 +30,6 @@ pub fn start_menus(show_string: &str) {
 
 /// Main menu
 pub fn start_menu_main() {
-    utils::clear_screen();
     start_menus("Welcome to CMD-Manager!");
     println!("{BLUE}#                                             #");
     println!(
@@ -44,6 +44,9 @@ pub fn start_menu_main() {
     println!(
         "#     {CYAN_UNDERLINE}4{BLUE} -> {CYAN_UNDERLINE}Brain Manager{BLUE}                      #"
     );
+    println!(
+        "#     {CYAN_UNDERLINE}5{BLUE} -> {CYAN_UNDERLINE}Security Manager{BLUE}                   #"
+    );
     println!("#                                             #");
     println!(
         "#     {CYAN_UNDERLINE}E{BLUE} -> {CYAN_UNDERLINE}Exit{BLUE}                               #"
@@ -51,14 +54,11 @@ pub fn start_menu_main() {
     println!("###############################################{CLOSE}");
 }
 
-//
-//  .FILE MANAGER
-//
-
-/// File menu
+///
+///  .FILE MANAGER MENU
+///
 pub fn start_menu_file() {
-    utils::clear_screen();
-    start_menus("File Manager");
+    start_menus("File Manager!");
     println!("{BLUE}#                                             #");
     println!("#     {CYAN_UNDERLINE}1{BLUE} -> {CYAN_UNDERLINE}Search in File{BLUE}                     #");
     println!("#     {CYAN_UNDERLINE}2{BLUE} -> {CYAN_UNDERLINE}Compare two files{BLUE}                  #");
@@ -67,24 +67,11 @@ pub fn start_menu_file() {
     println!("###############################################{CLOSE}");
 }
 
-/// File/Compare menu
-pub fn start_menu_compare() {
-    utils::clear_screen();
-    start_menus("Compare Files!");
-}
-
-/// File/Search menu
-pub fn start_menu_search() {
-    utils::clear_screen();
-    start_menus("Search in File!");
-}
-
 ///
 ///  .TODO MANAGER MENU
 ///
 pub fn start_menu_todo() {
-    utils::clear_screen();
-    start_menus("To-do Manager");
+    start_menus("To-do Manager!");
     println!("{BLUE}#                                             #");
     println!("#     {CYAN_UNDERLINE}1{BLUE} -> {CYAN_UNDERLINE}New Task{BLUE}                           #");
     println!("#     {CYAN_UNDERLINE}2{BLUE} -> {CYAN_UNDERLINE}Remove Task{BLUE}                        #");
@@ -95,14 +82,23 @@ pub fn start_menu_todo() {
     println!("###############################################{CLOSE}\n");
 }
 
-//
-//  .WEB MANAGER
-//
+///
+///  SECURITY MANAGER MENU
+///
+pub fn start_menu_security() {
+    start_menus("Security Manager!");
+    println!("{BLUE}#                                             #");
+    println!("#     {CYAN_UNDERLINE}1{BLUE} -> {CYAN_UNDERLINE}Show all security logs{BLUE}             #");
+    println!("#                                             #");
+    println!("#     {CYAN_UNDERLINE}E{BLUE} -> {CYAN_UNDERLINE}Exit{BLUE}                               #");
+    println!("###############################################{CLOSE}\n");
+}
 
-/// Web menu
+///
+///  .WEB MANAGER MENU
+///
 pub fn start_menu_web() {
-    utils::clear_screen();
-    start_menus("Web Manager");
+    start_menus("Web Manager!");
     println!("{BLUE}#                                             #");
     println!("#     {CYAN_UNDERLINE}1{BLUE} -> {CYAN_UNDERLINE}Download files{BLUE}                     #");
     println!("#     {CYAN_UNDERLINE}2{BLUE} -> {CYAN_UNDERLINE}Get price data{BLUE}                     #");
@@ -113,7 +109,6 @@ pub fn start_menu_web() {
 
 // Web/WebRequests menu
 pub fn start_menu_web_request() {
-    utils::clear_screen();
     start_menus("Price data!");
     println!("{BLUE}#                                             #");
     println!("#     {CYAN_UNDERLINE}1{BLUE} -> {CYAN_UNDERLINE}Get Ergo Price{BLUE}                     #");
@@ -123,13 +118,10 @@ pub fn start_menu_web_request() {
     println!("###############################################{CLOSE}");
 }
 
-//
-// .BRAIN MANAGER
-//
-
-// Brain menu
+///
+/// .BRAIN MANAGER MENU
+///
 pub fn start_menu_brain() {
-    utils::clear_screen();
     start_menus("Brain Manager!");
     println!("{BLUE}#                                             #");
     println!(
@@ -143,9 +135,6 @@ pub fn start_menu_brain() {
     );
     println!(
         "#     {CYAN_UNDERLINE}4{BLUE} -> {CYAN_UNDERLINE}Show all conversation history{BLUE}      #"
-    );
-    println!(
-        "#     {CYAN_UNDERLINE}5{BLUE} -> {CYAN_UNDERLINE}Show all security history{BLUE}          #"
     );
     println!("#                                             #");
     println!("#     {CYAN_UNDERLINE}E{BLUE} -> {CYAN_UNDERLINE}Exit{BLUE}                               #");

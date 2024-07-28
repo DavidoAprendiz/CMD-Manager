@@ -1,13 +1,12 @@
-use crate::{utils, views};
-use std::env;
+use crate::{queries, queries::brain, utils, views};
 
-pub mod queries;
+pub mod talk;
 
 /// Brain Manager
 ///
 /// Start menu layout, begin loop, ask user input or exit program
 pub fn main() {
-    queries::q_security_add_security_timestamps(queries::BRAIN_LOGON);
+    queries::security::q_security_add_security_timestamps(queries::BRAIN_LOGON);
     views::start_menu_brain();
 
     'main_loop: loop {
@@ -15,15 +14,14 @@ pub fn main() {
         let user_input = utils::get_user_input();
         utils::clear_screen();
         match user_input.trim() {
-            "1" => queries::start_new_talk(),
-            "2" => queries::q_brain_search_talks(),
-            "3" => queries::q_brain_delete_talk(),
+            "1" => talk::start_new_talk(),
+            "2" => brain::q_brain_search_talks(),
+            "3" => brain::q_brain_delete_talk(),
             "4" => {
-                queries::q_brain_show_all();
+                brain::q_brain_show_all();
                 println!("{}press ENTER to continue...{}", utils::BLUE, utils::CLOSE);
                 utils::get_user_input();
             }
-            "5" => queries::q_security_show_all(),
             _ => {
                 if utils::exit_program(&user_input) {
                     break 'main_loop;
@@ -33,31 +31,4 @@ pub fn main() {
         views::start_menu_brain();
     }
     utils::clear_screen();
-}
-
-/// Create folder Database (if does't exist) and verify the running operating system (OS) and return the correct path.
-pub fn db_folder() -> String {
-    let operating_system = env::consts::OS;
-    if operating_system.contains("windows") {
-        "\\Project\\".to_string()
-    } else {
-        "/Project/".to_string()
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn _db_folder() {
-        assert_eq!(
-            db_folder(),
-            if env::consts::OS.contains("windows") {
-                "\\Project\\".to_string()
-            } else {
-                "/Project/".to_string()
-            }
-        );
-    }
 }

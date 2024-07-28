@@ -1,10 +1,5 @@
-use crate::{utils, views};
+use crate::{utils::*, views};
 use reqwest::blocking::get;
-
-// Define constants for colors (change colors in utils.rs)
-const CLOSE: &str = utils::CLOSE;
-const BLUE: &str = utils::BLUE;
-const CYAN_UNDERLINE_BOLD: &str = utils::CYAN_UNDERLINE_BOLD;
 
 /// Web Request
 ///
@@ -13,13 +8,13 @@ pub fn main() {
     'main_loop: loop {
         views::start_menu_web_request();
         println!("Enter your option: ");
-        let user_input = utils::get_user_input();
+        let user_input = get_user_input();
 
         match user_input.trim() {
             "1" => get_price_data("ergo".to_string()),
             "2" => get_price_data("cardano".to_string()),
             _ => {
-                if utils::exit_program(&user_input) {
+                if exit_program(&user_input) {
                     break 'main_loop;
                 }
             }
@@ -48,5 +43,5 @@ fn get_price_data(name: String) {
             .replace("}}", "")
     );
     println!("{BLUE}Press ENTER to exit...{CLOSE}");
-    utils::get_user_input();
+    get_user_input();
 }

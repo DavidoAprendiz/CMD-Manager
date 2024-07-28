@@ -1,4 +1,4 @@
-use crate::{brain, utils, views};
+use crate::{queries, utils, views};
 mod new_task;
 mod remove_task;
 mod search_task;
@@ -8,7 +8,7 @@ mod show_task;
 ///
 /// Start menu layout, begin loop, ask user input or exit program
 pub fn main() {
-    brain::queries::q_security_add_security_timestamps(brain::queries::TODO_LOGON);
+    queries::security::q_security_add_security_timestamps(queries::TODO_LOGON);
     views::start_menu_todo();
     'main_loop: loop {
         println!("Enter your option: ");

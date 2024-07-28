@@ -1,25 +1,19 @@
-use crate::{utils, views};
+use crate::{utils::*, views};
 use reqwest::blocking::get;
 use std::{env, fs, io::Write};
-
-// Define constants for colors (change colors in utils.rs)
-const CLOSE: &str = utils::CLOSE;
-const BLUE: &str = utils::BLUE;
-const CYAN_UNDERLINE: &str = utils::CYAN_UNDERLINE;
-const ERRO: &str = utils::ERRO;
 
 /// Download
 ///
 /// Check folder Downloads (if !exists and OS), get user input and write directly to file
 pub fn main() {
-    utils::create_folder(downloads_folder());
+    create_folder(downloads_folder());
     views::start_menus("Download data!");
     println!("{CYAN_UNDERLINE}Enter the url to download:{CLOSE}");
-    let user_input = utils::get_user_input();
+    let user_input = get_user_input();
     let url_response = get_response(user_input);
     write_file(url_response);
     println!("{BLUE}Press ENTER to continue...{CLOSE}");
-    utils::get_user_input();
+    get_user_input();
 }
 
 /// Create folder Downloads (if does't exist) and verify the running operating system (OS) and return the correct path.
@@ -50,7 +44,7 @@ fn write_file(url_response: String) {
             .expect("\x1b[0m\x1b[31;3mFailed to access current directory.\x1b[0m\n")
             .display(),
         downloads_folder(),
-        utils::get_current_time()
+        get_current_time()
     );
     let mut file =
         fs::File::create(file_name).expect("\x1b[0m\x1b[31;3mFailed to create text file!\x1b[0m\n");

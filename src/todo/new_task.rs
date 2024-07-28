@@ -1,10 +1,8 @@
-use crate::brain::queries;
-use crate::{utils, views};
+use crate::{queries::todo, utils, views};
 use std::io;
 
 /// Create a new task with the user input. Generate field 'task_name' and 'task'.
 pub fn add_task() {
-    utils::clear_screen();
     views::start_menus("Create a new task!");
 
     println!(
@@ -27,7 +25,7 @@ pub fn add_task() {
         .read_line(&mut task)
         .expect("\x1b[0m\x1b[31;3mFailed to get 'task description'.\x1b[0m\n");
 
-    queries::q_todo_add_task(task_name, task);
+    todo::q_todo_add_task(task_name, task);
     views::start_menus("Task saved!");
     println!(
         "\n{}Press ENTER to continue...{}",

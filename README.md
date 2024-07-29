@@ -3,9 +3,9 @@
 <div align="center">
 <img alt="Rust CI" src="https://github.com/DavidoAprendiz/Rust-in-Progress/actions/workflows/rust.yml/badge.svg">
 <br>
-<img alt="CMD-Manager" src="https://img.shields.io/badge/cmd_manager-0.4.0-000000?style=for-the-badge&color=blue">
+<img alt="CMD-Manager" src="https://img.shields.io/badge/CMD_Manager-v0.4.1-blue">
 <br>
-<img alt="Made with Rust and SQLite" src="https://skillicons.dev/icons?i=rust,sqlite">
+<img alt="Made with Rust, SQLite and Ollama" src="https://skillicons.dev/icons?i=rust,sqlite">
 <img alt="ollama" height="50px" src="https://github.com/ollama/ollama/assets/3325447/0d0b44e2-8f4a-4e99-9b52-a5c1c741c8f7">
 
 <a>Made with Rust, SQLite and Ollama</a>
@@ -15,9 +15,9 @@
   <a href="#-how-to-use">🚀 How to use</a> •
   <a href="#-or-if-you-want-to-changeedit-the-application">📥 Install</a> •
   <a href="#-manage-the-database-via-graphical-interface-gui">⛁ Manage Database</a> •
-  <a href="#CONTRIBUTING.md">💻 Contributing</a> •
-  <a href="#LICENSE">📃 License</a> •
-  <a href="#LICENSE">✅ Roadmap</a> •
+  <a href="https://github.com/DavidoAprendiz/CMD-Manager/blob/main/CONTRIBUTING.md">💻 Contributing</a> •
+  <a href="https://github.com/DavidoAprendiz/CMD-Manager/blob/main/LICENSE">📃 License</a> •
+  <a href="#-Roadmap">✅ Roadmap</a> •
 </div>
 
 ---
@@ -28,7 +28,7 @@
 
 </div>
 
-## ⚡Description
+## ⚡ Description
 
 A **multi-application** command-line powered by AI, focused on privacy (because privacy matters!).
 
@@ -100,7 +100,7 @@ Ollama
 - Open database in the default path:
   - `/Project/database.db`
 
-## ✅Roadmap
+## ✅ Roadmap
 
 - [X] **Todo Manager**
   - [X] Add new tasks.
@@ -132,6 +132,6 @@ Ollama
   - [ ] Web manager
 - [ ] Database security:
   - [X] Add Security Manager
-  - [ ] Add password protection.
-  - [ ] Evaluate gpg symmetric encryption...
-- [ ] Verify (and implement) new llama 3.1 version.
+  - [ ] Protect DB with password protection.
+  - [ ] Encrypt DB with GPG (symmetric keys)...
+- [X] Update to new Ollama model (llama 3.1).

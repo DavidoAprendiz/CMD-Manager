@@ -89,6 +89,12 @@ pub fn start_menu_security() {
     start_menus("Security Manager!");
     println!("{BLUE}#                                             #");
     println!("#     {CYAN_UNDERLINE}1{BLUE} -> {CYAN_UNDERLINE}Show all security logs{BLUE}             #");
+    println!("#     {CYAN_UNDERLINE}2{BLUE} -> {CYAN_UNDERLINE}Protect DB with your password{BLUE}      #");
+    println!(
+        "#     {CYAN_UNDERLINE}3{BLUE} -> {CYAN_UNDERLINE}Encrypt DB with GPG (symmetric key){BLUE}#"
+    );
+    println!("#     {CYAN_UNDERLINE}4{BLUE} -> {CYAN_UNDERLINE}Remove DB password protection{BLUE}      #");
+    println!("#     {CYAN_UNDERLINE}5{BLUE} -> {CYAN_UNDERLINE}Remove DB encryption keys{BLUE}          #");
     println!("#                                             #");
     println!("#     {CYAN_UNDERLINE}E{BLUE} -> {CYAN_UNDERLINE}Exit{BLUE}                               #");
     println!("###############################################{CLOSE}\n");

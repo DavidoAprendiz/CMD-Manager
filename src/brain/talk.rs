@@ -18,7 +18,7 @@ pub fn start_new_talk() {
 
     let comm = String::from_utf8(
         Command::new("/usr/local/bin/ollama")
-            .args(["run", "llama3"])
+            .args(["run", "llama3.1"])
             .arg(&user_input)
             .output()
             .expect("msg")

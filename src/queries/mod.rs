@@ -1,3 +1,4 @@
+use crate::utils;
 use std::env;
 pub mod brain;
 pub mod security;
@@ -43,6 +44,12 @@ const VIEW_TODO: &str = "todo_log_opened";
 const ADD_TASK: &str = "task_added";
 const REMOVE_TASK: &str = "task_removed";
 const SEARCH_TODO: &str = "todo_searched";
+
+/// Start DB Connection
+pub fn start_db_connection() -> sqlite::Connection {
+    let path = utils::get_file_path(format!("{}{}", db_folder(), DATABASE));
+    sqlite::open(path).unwrap()
+}
 
 /// Create folder Database (if does't exist) and verify the running operating system (OS) and return the correct path.
 pub fn db_folder() -> String {

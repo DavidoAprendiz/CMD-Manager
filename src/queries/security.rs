@@ -7,10 +7,7 @@ use sqlite::State;
 
 /// Create 'TB_SECURITY' table
 pub fn q_security_create_table() {
-    create_folder(db_folder());
-    let path = get_file_path(format!("{}{}", db_folder(), DATABASE));
-    let conn = sqlite::open(path).unwrap();
-
+    let conn = start_db_connection();
     let query = format!(
         "CREATE TABLE IF NOT EXISTS {TB_SECURITY} ({CL_TIMESTAMP} TEXT, {CL_REASON} TEXT);"
     );
@@ -21,8 +18,7 @@ pub fn q_security_create_table() {
 
 /// Insert 'reason'  to 'TB_SECURITY' table.
 pub fn q_security_add_security_timestamps(reason: &str) {
-    let path = get_file_path(format!("{}{}", db_folder(), DATABASE));
-    let conn = sqlite::open(path).unwrap();
+    let conn = start_db_connection();
     let query = format!(
         "
     INSERT INTO {TB_SECURITY} ({CL_TIMESTAMP}, {CL_REASON}) 
@@ -39,8 +35,7 @@ pub fn q_security_add_security_timestamps(reason: &str) {
 pub fn q_security_show_all() {
     q_security_add_security_timestamps(VIEW_SECURITY);
     views::start_menus("Security History Log!");
-    let path = get_file_path(format!("{}{}", db_folder(), DATABASE));
-    let conn = sqlite::open(path).unwrap();
+    let conn = start_db_connection();
     let query = format!("SELECT {CL_ID}, {CL_TIMESTAMP}, {CL_REASON} FROM {TB_SECURITY};");
     let mut statement = conn.prepare(query).unwrap();
     statement.iter();

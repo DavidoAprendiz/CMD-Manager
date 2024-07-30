@@ -122,14 +122,14 @@ Ollama
   - [X] View 'Brain' history database.
   - [X] Manage 'Brain' history database.
   - [X] View 'Security' history database.
-  - [X] Security Audit. Everything is logged in Security database.
+  - [X] Security Audit logs.
 
   **(in-progress)**
 
 - [ ] Database integration with all missing modules:
   - [X] Todo manager
   - [ ] File manager
-  - [ ] Web manager
+  - [X] Web manager
 - [ ] Database security:
   - [X] Add Security Manager
   - [ ] Protect DB with password protection.

@@ -1,3 +1,4 @@
+use crate::views;
 use chrono::Local;
 use std::{env, io, process};
 
@@ -39,9 +40,7 @@ pub fn clear_screen() {
 pub fn exit_program(input: &str) -> bool {
     if input.trim().to_lowercase().starts_with('q') || input.trim().to_lowercase().starts_with('e')
     {
-        println!("\n{BLUE}###############################################");
-        println!("#                  {CYAN_UNDERLINE_BOLD}Exiting...{BLUE}                 #");
-        println!("###############################################{CLOSE}\n");
+        views::start_menus("Exiting...");
         return true;
     }
     false

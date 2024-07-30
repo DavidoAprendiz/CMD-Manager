@@ -9,7 +9,7 @@ extern crate similar;
 /// Start menu layout, begin loop, ask user input or exit program
 pub fn main() {
     views::start_menus("Compare Files!");
-
+    utils::get_files_from_folder("".to_string());
     println!("{}First file name:{}", utils::CYAN_UNDERLINE, utils::CLOSE);
     let file_1 = utils::get_user_input();
     println!(

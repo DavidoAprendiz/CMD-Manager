@@ -1,4 +1,8 @@
-use crate::{utils::*, views};
+use crate::{
+    queries::{q_save_data, ADD_PRICE, CL_WEB_NAME, CL_WEB_PRICE, TB_WEB_API},
+    utils::{exit_program, get_user_input, BLUE, CLOSE, CYAN_UNDERLINE_BOLD},
+    views,
+};
 use reqwest::blocking::get;
 
 /// Web Request
@@ -19,6 +23,8 @@ pub fn main() {
                 }
             }
         }
+        println!("{BLUE}Press ENTER to exit...{CLOSE}");
+        get_user_input();
     }
 }
 
@@ -34,6 +40,15 @@ fn get_price_data(name: String) {
         .text()
         .expect("\x1b[0m\x1b[31;3mFailed to display json.\x1b[0m");
 
+    q_save_data(
+        name.clone(),
+        url_response.clone(),
+        TB_WEB_API,
+        CL_WEB_NAME,
+        CL_WEB_PRICE,
+        ADD_PRICE,
+    );
+
     println!(
         "\n{CYAN_UNDERLINE_BOLD}{} is currently @ {:.5}€{CLOSE}",
         &name.to_uppercase(),
@@ -42,6 +57,4 @@ fn get_price_data(name: String) {
             .replace("{\"cardano\":{\"eur\":", "")
             .replace("}}", "")
     );
-    println!("{BLUE}Press ENTER to exit...{CLOSE}");
-    get_user_input();
 }

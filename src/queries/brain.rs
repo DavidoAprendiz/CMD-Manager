@@ -5,23 +5,9 @@ use sqlite::State;
 /// BRAIN MANAGER
 ///
 
-/// Create 'TB_BRAIN' table
-pub fn q_brain_create_table() {
-    let conn = queries::start_db_connection();
-    let query = format!(
-        "CREATE TABLE IF NOT EXISTS {} ({} TEXT, {} BLOB, {} BLOB);",
-        queries::TB_BRAIN,
-        queries::CL_TIMESTAMP,
-        queries::CL_QUESTIONS,
-        queries::CL_ANSWERS
-    );
-    conn.execute(query)
-        .expect("\x1b[0m\x1b[31;3mFailed to execute query! 'q_brain_create_table()'\x1b[0m");
-}
-
 /// Insert data 'timestamp',user 'question' and user 'answer' to 'TB_BRAIN' table
 pub fn q_brain_add_talk(question: String, answer: String) {
-    security::q_security_add_security_timestamps(queries::ADD_TALK);
+    security::q_security_add_timestamps(queries::ADD_TALK);
     let conn = queries::start_db_connection();
     let query = format!(
         "
@@ -41,7 +27,7 @@ pub fn q_brain_add_talk(question: String, answer: String) {
 
 /// SEARCH BRAIN TALKS
 pub fn q_brain_search_talks() {
-    security::q_security_add_security_timestamps(queries::SEARCH_TALK);
+    security::q_security_add_timestamps(queries::SEARCH_TALK);
     views::start_menus("Search anything!");
     println!(
         "\n{}Please insert the pattern you want to search:{}",
@@ -90,7 +76,7 @@ pub fn q_brain_search_talks() {
 
 /// DELETE BRAIN TALKS
 pub fn q_brain_delete_talk() {
-    security::q_security_add_security_timestamps(queries::REMOVE_TALK);
+    security::q_security_add_timestamps(queries::REMOVE_TALK);
     views::start_menus("Delete your conversations!");
     let conn = queries::start_db_connection();
     q_brain_show_all();
@@ -130,7 +116,7 @@ pub fn q_brain_delete_talk() {
 
 /// SHOW ALL TALKS
 pub fn q_brain_show_all() {
-    security::q_security_add_security_timestamps(queries::VIEW_TALK);
+    security::q_security_add_timestamps(queries::VIEW_TALK);
     views::start_menus("Brain History Log!");
     let conn = queries::start_db_connection();
     let query = format!(

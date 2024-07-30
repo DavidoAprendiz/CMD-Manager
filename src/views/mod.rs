@@ -1,14 +1,8 @@
-use crate::utils;
-
-// Define constants for colors (change colors in utils.rs)
-const CLOSE: &str = utils::CLOSE;
-const BLUE: &str = utils::BLUE;
-const CYAN_UNDERLINE: &str = utils::CYAN_UNDERLINE;
-const CYAN_UNDERLINE_BOLD: &str = utils::CYAN_UNDERLINE_BOLD;
+use crate::utils::{clear_screen, BLUE, CLOSE, CYAN_UNDERLINE, CYAN_UNDERLINE_BOLD};
 
 /// Function to build 'simple' menus
 pub fn start_menus(show_string: &str) {
-    utils::clear_screen();
+    clear_screen();
     let blank_spaces = 45 - show_string.len();
     let total_blank_spaces = String::from(" ").repeat(blank_spaces / 2);
 

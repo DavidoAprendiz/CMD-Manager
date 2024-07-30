@@ -1,4 +1,10 @@
-use crate::{queries, utils::*, views};
+use crate::{
+    queries,
+    utils::{
+        get_current_time, get_user_input, BLUE, CLOSE, CYAN_UNDERLINE, CYAN_UNDERLINE_BOLD, ERRO,
+    },
+    views,
+};
 use std::fs;
 use std::io::Write;
 use std::process::Command;
@@ -9,7 +15,7 @@ use std::process::Command;
 
 /// Start a new conversation
 pub fn start_new_talk() {
-    queries::security::q_security_add_security_timestamps(queries::START_TALK);
+    queries::security::q_security_add_timestamps(queries::START_TALK);
     views::start_menus("Let's brainstorm!");
     println!("\n{CYAN_UNDERLINE}What's your question?{CLOSE}");
     let user_input = get_user_input();
@@ -53,7 +59,7 @@ pub fn start_new_talk() {
 
 /// Save conversation to a Markdown file
 fn talk_save_to_md(user_input: String, comm: String) {
-    queries::security::q_security_add_security_timestamps(queries::SAVE_MD);
+    queries::security::q_security_add_timestamps(queries::SAVE_MD);
     let path: String = {
         format!(
             "{}{}{}.md",

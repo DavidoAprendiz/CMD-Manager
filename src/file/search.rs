@@ -1,4 +1,7 @@
-use crate::{utils, views};
+use crate::{
+    queries::{file, CL_FILENAME_1, CL_FILE_PATTERN, SEARCH_FILE, TB_FILE_SEARCH},
+    utils, views,
+};
 use std::fs;
 
 /// Search
@@ -41,7 +44,7 @@ fn get_file(user_pattern: String) {
 
 /// Show results from the chosen pattern and file.
 fn get_results(user_pattern: String, user_file: String) {
-    let path = utils::get_file_path(user_file);
+    let path = utils::get_file_path(user_file.clone());
 
     println!(
         "\n{}###############################################{}",
@@ -58,12 +61,16 @@ fn get_results(user_pattern: String, user_file: String) {
 
     let mut count_total: u64 = 0;
     let mut count_line: u64 = 0;
+    let mut my_vec: Vec<String> = vec![];
+
     match fs::read_to_string(path) {
         Ok(lines) => {
             for line in lines.lines() {
                 count_line += 1;
                 if line.trim().contains(user_pattern.trim()) {
                     count_total += 1;
+                    my_vec.push(line.trim().to_string());
+                    my_vec.push("<br>".to_string());
                     println!("  - Found in line {count_line}:    {}\n", line.trim());
                 }
             }
@@ -77,6 +84,15 @@ fn get_results(user_pattern: String, user_file: String) {
                 utils::BLUE,
                 utils::CLOSE
             );
+            file::q_file_save_data(
+                TB_FILE_SEARCH,
+                CL_FILE_PATTERN,
+                CL_FILENAME_1,
+                user_pattern.as_str(),
+                user_file.as_str(),
+                my_vec.join(" ").as_str(),
+                SEARCH_FILE,
+            )
         }
         Err(e) => println!("{}Failed to open file.\n{e}{}", utils::ERRO, utils::CLOSE),
     }

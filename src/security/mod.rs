@@ -1,23 +1,29 @@
-use crate::{queries::security, utils, views};
+use crate::{
+    queries,
+    utils::{clear_screen, exit_program, get_user_input, BLUE, CLOSE},
+    views,
+};
+pub mod secure_db;
 
 pub fn main() {
     views::start_menu_security();
     'main_loop: loop {
         println!("Enter your option: ");
-        let user_input = utils::get_user_input();
+        let user_input = get_user_input();
         match user_input.trim() {
-            "1" => security::q_security_show_all(),
-            "2" => todo!(), //protect your db with password
-            "3" => todo!(), //encrypt your db with GPG (symmetric keys)
-            "4" => todo!(), //remove db password protection
-            "5" => todo!(), //remove db encryption keys
+            "1" => queries::security::q_security_show_all(),
+            "2" => secure_db::encrypt_db(queries::db_folder().as_str(), queries::DATABASE),
+            "3" => secure_db::decrypt_db(queries::db_folder().as_str(), queries::DATABASE),
             _ => {
-                if utils::exit_program(&user_input) {
+                if exit_program(&user_input) {
                     break 'main_loop;
                 }
             }
         }
+        println!("\n{BLUE}Press ENTER to continue...{CLOSE}");
+        get_user_input();
+        clear_screen();
         views::start_menu_security();
     }
-    utils::clear_screen();
+    clear_screen();
 }

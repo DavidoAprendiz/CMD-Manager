@@ -1,6 +1,6 @@
 use crate::{
     queries::{start_db_connection, CL_ID, CL_REASON, CL_TIMESTAMP, TB_SECURITY, VIEW_SECURITY},
-    utils::{get_user_input, BLUE, CLOSE, CYAN_UNDERLINE},
+    utils::{CLOSE, CYAN_UNDERLINE},
     views,
 };
 use sqlite::State;
@@ -51,6 +51,4 @@ pub fn q_security_show_all() {
             statement.read::<String, _>(CL_REASON).unwrap(),
         );
     }
-    println!("\n{BLUE}###############################################\nPress ENTER to continue...{CLOSE}");
-    get_user_input();
 }

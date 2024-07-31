@@ -6,7 +6,7 @@ pub mod security;
 pub mod todo;
 
 // Database file name
-const DATABASE: &str = "database.db";
+pub const DATABASE: &str = "database.db";
 
 // Tables
 pub const TB_TODO: &str = "TODO";
@@ -14,7 +14,7 @@ const TB_SECURITY: &str = "SECURITY";
 pub const TB_BRAIN: &str = "BRAIN";
 pub const TB_WEB_API: &str = "API";
 pub const TB_WEB_DOWNLOAD: &str = "DOWNLOAD";
-const TB_FILE_COMPARE: &str = "FILE_COMPARE";
+pub const TB_FILE_COMPARE: &str = "FILE_COMPARE";
 pub const TB_FILE_SEARCH: &str = "FILE_SEARCH";
 
 // SECURITY columns
@@ -31,10 +31,10 @@ pub const CL_WEB_NAME: &str = "name";
 pub const CL_WEB_PRICE: &str = "price";
 
 // FILE columns
-pub const CL_FILENAME: &str = "file_name_1";
-pub const CL_FILE_CONTENT: &str = "file_content";
+pub const CL_FILE_PATTERN: &str = "file_pattern";
+pub const CL_FILENAME_1: &str = "file_name_1";
 pub const CL_FILENAME_2: &str = "file_name_2";
-pub const CL_FILE_DIFF: &str = "file_diff";
+pub const CL_FILE_CONTENT: &str = "file_content";
 
 // DB BRAIN columns
 pub const CL_QUESTIONS: &str = "questions";
@@ -63,8 +63,32 @@ pub const WEB_LOGON: &str = "web_logon";
 pub const ADD_DOWNLOAD: &str = "download_saved";
 pub const ADD_PRICE: &str = "price_saved";
 pub const FILE_LOGON: &str = "file_logon";
-const SEARCH_FILE: &str = "file_searched";
-const COMPARE_FILE: &str = "file_compared";
+pub const SEARCH_FILE: &str = "file_searched";
+pub const COMPARE_FILE: &str = "file_compared";
+
+/// Create all tables (if not exists).
+/// Add timestamp/logs to Table SECURITY
+pub fn first_config() {
+    utils::create_folder(db_folder());
+    security::q_security_create_table();
+    file::q_file_create_table(
+        TB_FILE_SEARCH,
+        CL_FILE_PATTERN,
+        CL_FILENAME_1,
+        CL_FILE_CONTENT,
+    );
+    file::q_file_create_table(
+        TB_FILE_COMPARE,
+        CL_FILENAME_1,
+        CL_FILENAME_2,
+        CL_FILE_CONTENT,
+    );
+    q_create_table(TB_TODO, CL_TODO_TITLE, CL_TODO_TASK);
+    q_create_table(TB_BRAIN, CL_QUESTIONS, CL_ANSWERS);
+    q_create_table(TB_WEB_API, CL_WEB_NAME, CL_WEB_PRICE);
+    q_create_table(TB_WEB_DOWNLOAD, CL_DOWNLOAD_URL, CL_DOWNLOAD_BODY);
+    security::q_security_add_timestamps(SYSTEM_LOGON);
+}
 
 /// Start DB Connection
 pub fn start_db_connection() -> sqlite::Connection {
@@ -76,13 +100,13 @@ pub fn start_db_connection() -> sqlite::Connection {
 pub fn q_create_table(table: &str, col1: &str, col2: &str) {
     let conn = start_db_connection();
     let query = format!(
-        "CREATE TABLE IF NOT EXISTS {table} ({CL_TIMESTAMP} TEXT, {col1} TEXT, {col2} BLOB);"
+        "CREATE TABLE IF NOT EXISTS {table} ({CL_TIMESTAMP} TEXT, {col1} BLOB, {col2} BLOB);"
     );
     conn.execute(query)
         .expect("\x1b[0m\x1b[31;3mFailed to execute query! 'q_create_table()'\x1b[0m");
 }
 
-/// Save to database
+/// Save to database (2 columns)
 pub fn q_save_data(
     name: String,
     url_body: String,

@@ -71,16 +71,16 @@ The security logs are saved/stored in the 'Security' table.
 
 #### Install pre-requirements
 
-> Rust
+- Rust
 >
 > - Install the latest [Rust](https://www.rust-lang.org/learn/get-started)
 >
-> Ollama
+- Ollama
 >
 > - Install Llama3.1 from [Ollama](https://ollama.com/)
 >   - (needed for "Brain module")
 >
-> GPG
+- GPG
 >
 > - Check if GPG is installed:
 >   - `gpg --version`
@@ -91,11 +91,11 @@ The security logs are saved/stored in the 'Security' table.
 
 #### Clone (or Fork directly)
 
-> - Open a terminal and clone the repository:
+- Open a terminal and clone the repository:
 >   - `git clone https://github.com/DavidoAprendiz/CMD-Manager.git`
-> - Enter the directory:
+- Enter the directory:
 >   - `cd CMD-Manager`
-> - Run Cargo:
+- Run Cargo:
 >   - `cargo run`
 
 ---
@@ -104,7 +104,7 @@ The security logs are saved/stored in the 'Security' table.
 
 #### To view all your database information
 
-> - Download and install [SQLite Browser](https://sqlitebrowser.org/)
+- Download and install [SQLite Browser](https://sqlitebrowser.org/)
 > - Open database in the default path:
 >   - `/Project/database.db`
 

@@ -22,7 +22,7 @@
 
 ---
 
-![cmd-manager_gif]()
+![cmd-manager_gif](https://github.com/user-attachments/assets/6af21706-4419-434e-82ac-9d09e1d4e0df)
 
 </div>
 

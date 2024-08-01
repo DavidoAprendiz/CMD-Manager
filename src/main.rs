@@ -9,10 +9,10 @@ mod web; // Web Manager
 
 /// Application main loop
 ///
-/// Start menu layout, begin loop, ask user input or exit program
+/// Start menu layout, create tables, begin loop, ask user input or exit program
 fn main() {
     views::start_menu_main();
-    start_db();
+    queries::first_config();
     'main_loop: loop {
         println!("Enter your option: ");
         let user_input = utils::get_user_input();
@@ -30,16 +30,4 @@ fn main() {
         }
         views::start_menu_main();
     }
-}
-
-/// Create tables (if not exists).
-///
-/// Add timestamp to TB_SECURITY
-fn start_db() {
-    queries::security::q_security_create_table();
-    queries::todo::q_todo_create_table();
-    // TODO queries::file::q_file_create_table();
-    // TODO queries::web::q_web_create_table();
-    queries::brain::q_brain_create_table();
-    queries::security::q_security_add_security_timestamps(queries::SYSTEM_LOGON);
 }

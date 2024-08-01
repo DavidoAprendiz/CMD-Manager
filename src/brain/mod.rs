@@ -6,7 +6,7 @@ pub mod talk;
 ///
 /// Start menu layout, begin loop, ask user input or exit program
 pub fn main() {
-    queries::security::q_security_add_security_timestamps(queries::BRAIN_LOGON);
+    queries::security::q_security_add_timestamps(queries::BRAIN_LOGON);
     views::start_menu_brain();
 
     'main_loop: loop {

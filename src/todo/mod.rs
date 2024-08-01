@@ -8,7 +8,7 @@ mod show_task;
 ///
 /// Start menu layout, begin loop, ask user input or exit program
 pub fn main() {
-    queries::security::q_security_add_security_timestamps(queries::TODO_LOGON);
+    queries::security::q_security_add_timestamps(queries::TODO_LOGON);
     views::start_menu_todo();
     'main_loop: loop {
         println!("Enter your option: ");

@@ -1,11 +1,12 @@
 [package]
 name = "cmd-manager"
 repository = "https://github.com/DavidoAprendiz/CMD-Manager"
-version = "0.5.0"
+authors = ["David <davidoaprendiz@proton.me>"]
+version = "0.5.1"
 edition = "2021"
 
 [dependencies]
 chrono = "0.4.38"
-similar = "2.5.0"
+similar = "2.6.0"
 reqwest = { version = "0.12.5", features = ["blocking"] }
-sqlite = "0.36.0"
+sqlite = "0.36.1"

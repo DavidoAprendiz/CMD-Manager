@@ -40,12 +40,12 @@ fn get_results(file1: String, file2: String) {
     let file_1: Result<String, std::io::Error> = fs::read_to_string(&file1_path);
     let file_2: Result<String, std::io::Error> = fs::read_to_string(&file2_path);
 
-    println!("{file2_path}");
-    println!("{file1_path}");
+    println!("FILE 1: {file1_path}");
+    println!("FILE 2: {file2_path}");
 
     let diff: Vec<String> = TextDiff::from_lines(
-        &file_1.expect("\x1b[0m\x1b[31;3mFailed to read file 1.\x1b[0m"),
-        &file_2.expect("\x1b[0m\x1b[31;3mFailed to read file 2.\x1b[0m"),
+        &file_1.unwrap_or("\x1b[0m\x1b[31;3mFailed to read files.\x1b[0m".to_string()),
+        &file_2.unwrap_or("\x1b[0m\x1b[31;3mFailed to read files.\x1b[0m".to_string()),
     )
     .iter_all_changes()
     .map(|change| format!("{:?} {}", change.tag(), change))
